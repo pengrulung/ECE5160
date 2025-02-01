@@ -283,22 +283,34 @@
                                     <p class="mb-0 text-start">Lab 1 is divided into two parts:</p>
                                     <p class="mb-0 text-start" >Part A focuses on familiarizing with the SparkFun RedBoard Artemis Nano, programming the board, using the onboard LED, reading/writing serial messages over USB, and utilizing the temperature sensor and Pulse Density Microphone.</p>
                                     <p class="mb-0 text-start mb-3">Part B involves establishing Bluetooth communication between the computer and the Artemis board. Python commands will be sent from a Jupyter notebook to the Artemis, and data can be sent from the Artemis to the computer via Bluetooth for future labs.</p> 
-                                    <h2 class="portfolio-title text-secondary mb-3">Prelab</h2>
-                                    <p class="mb-4">This lab</p>
-                                    <h2 class="portfolio-title text-secondary mb-3">Task 1: Run Blink</h2>
-                                    <p class="mb-4">This lab</p>
-                                    <!-- Embed YouTube video -->
-                                    <iframe width="560" height="315" src="https://youtube.com/embed/X1HsQrllCZ8" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                                    <h2 class="portfolio-title text-secondary mb-3">Task 2: Run Serial</h2>
-                                    <p class="mb-4">This lab</p>  
-                                    <iframe width="560" height="315" src="https://youtube.com/embed/ngC0xr5F0QU" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                                    <h2 class="portfolio-title text-secondary mb-3">Task 3: Run </h2>
-                                    <p class="mb-4">This lab</p>
-                                    <iframe width="560" height="315" src="https://youtube.com/embed/rh1vmfPqNuc" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                                    <h2 class="portfolio-title text-secondary mb-3">Task 4: Run Microphone </h2>
-                                    <p class="mb-4">This lab</p>
-                                    <iframe width="560" height="315" src="https://youtube.com/embed/gWOaUkqGul8" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                                                                            
+                                    <h2 class="portfolio-title text-secondary mb-3">Part 1 The Artemis board</h2>
+                                    <h2 class="portfolio-title text-secondary mb-3"style="font-size: 2rem;">Prelab</h2>                                    
+                                    <p class="mb-4 text-start">We first installed Arduino IDE from <a href="https://www.arduino.cc/en/software" target="_blank">this link</a>. Then, following the setup instructions provided on <a href="https://learn.sparkfun.com/tutorials/artemis-development-with-the-arduino-ide/setting-up-the-arduino-ide" target="_blank">this link</a>, we added the SparkFun Arduino Artemis to the IDE, ensuring that the latest SparkFun Apollo3 board package was installed. Finally, we selected RedBoard Artemis Nano as our board.</p>
+                                    <h2 class="portfolio-title text-secondary mb-3" style="font-size: 2rem;">Task 1: Run Blink</h2>
+                                    <p class="mb-4 text-start">This program blinks an onboard LED by setting the pin connected to the LED to HIGH for one second, followed by setting the pin to LOW for one second. The basic "Blink" example is used to test the LED on the module. With the video below, the code is correctly uploaded to the board and the LED on the board functions properly.</p>
+                                    <iframe class="mb-5" width="560" height="315" src="https://youtube.com/embed/X1HsQrllCZ8" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                    <h2 class="portfolio-title text-secondary mb-3" style="font-size: 2rem;">Task 2: Run Serial</h2>
+                                    <p class="mb-4 text-start">The code tests serial communication between the computer and the Artemis board. The Artemis board sends a counting test to the serial monitor via UART and echoes any string sent from the computer, demonstrating that serial communication is set up correctly. When using serial communication, ensure the baud rate on the serial monitor matches the one defined in the code (9600 in this case) for proper communication. See the demo video below.</p> 
+                                    <iframe class="mb-5" width="560" height="315" src="https://youtube.com/embed/ngC0xr5F0QU" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                    <h2 class="portfolio-title text-secondary mb-3" style="font-size: 2rem;">Task 3: Analog Read</h2>
+                                    <p class="mb-4 text-start">The code tests the temperature sensor on the board. It uses the analogReadTemp() function to obtain the raw ADC counts from the temperature sensor and send the data to the serial monitor. In the video, when the finger is removed, the temperature decreases from around 33,900 to about 33,500.</p>
+                                    <iframe class="mb-5" width="560" height="315" src="https://youtube.com/embed/rh1vmfPqNuc" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                    <h2 class="portfolio-title text-secondary mb-3" style="font-size: 2rem;">Task 4: Microphone Output</h2>
+                                    <p class="mb-4 text-start">The code tests the microphone on the Artemis board. As shown in the video below, the Artemis is able to capture frequency readings from the ambient sound. When I whistle in the video, you can observe the frequency change.</p>
+                                    <iframe class="mb-5" width="560" height="315" src="https://youtube.com/embed/gWOaUkqGul8" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                    <h2 class="portfolio-title text-secondary mb-3" style="font-size: 2rem;">Additional tasks: Blink with note "C"</h2>
+                                    <p class="mb-4 text-start">With the example code from Arduino (task 4), we can modify the program to turn on the LED on the Artemis board when the note "C" is played. First, the frequency of the note "C" is measured to determine the appropriate frequency range for lighting up the LED (I set the range to 520-530 Hz here). The LED pin is then set to HIGH if the detected loudest frequency falls within that range, and set to LOW otherwise.</p>
+                                    <iframe class="mb-5" width="560" height="315" src="https://youtube.com/embed/_bwo3h2kysc" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>                                       
+                                    <h2 class="portfolio-title text-secondary mb-3">Part 2 Bluetooth</h2>
+                                    <h2 class="portfolio-title text-secondary mb-3" style="font-size: 2rem;">Prelab</h2>
+                                    <p class="mb-4 text-start">This </p>
+                                    <h2 class="portfolio-title text-secondary mb-3" style="font-size: 2rem;">Task 1: Echo Command</h2>
+                                    <p class="mb-4 text-start">This </p>
+                                    <iframe class="mb-5" width="560" height="315" src="https://youtube.com/embed/X1HsQrllCZ8" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                    <h2 class="portfolio-title text-secondary mb-3" style="font-size: 2rem;">Task 2: </h2>
+                                    <p class="mb-4 text-start">This </p>
+                                    <iframe class="mb-5" width="560" height="315" src="https://youtube.com/embed/X1HsQrllCZ8" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                    
                                     <button class="btn btn-primary" data-bs-dismiss="modal">
                                         <i class="fas fa-xmark fa-fw"></i>
                                         Close Window
