@@ -303,12 +303,27 @@
                                     <iframe class="mb-5" width="560" height="315" src="https://youtube.com/embed/_bwo3h2kysc" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>                                       
                                     <h2 class="portfolio-title text-secondary mb-3">Part 2 Bluetooth</h2>
                                     <h2 class="portfolio-title text-secondary mb-3" style="font-size: 2rem;">Prelab</h2>
-                                    <p class="mb-4 text-start">This </p>
+                                    <p class="mb-2 text-start">Before the lab, install Python and pip3 with the latest release. Then, create a virtual environment using the following commands:</p>
+                                    <p class="mb-2 text-start">python3 -m pip install --user virtualenv<br>python3 -m venv FastRobots_ble </p>   
+                                    <p class="mb-2 text-start">Activate the environment with the following commands:</p>
+                                    <p class="mb-2 text-start">.\FastRobots_ble\Scripts\activate</br>jupyter lab</p>                                    
+                                    <h2 class="portfolio-title text-secondary mb-3" style="font-size: 2rem;">Configuration</h2>
+                                    <p class="mb-4 text-start">To establish a Bluetooth connection, I needed to know my device's MAC address, which I printed to the serial monitor. Also, I need a UUID specific to my board to avoid connecting to the wrong one. All of this information was added to the connections.yaml file in the demo codebase. The following screenshot shows how I obtained the MAC address and UUID.</p>
+                                    <img class="img-fluid rounded mb-5" src="assets/img/lab1/mac.png" alt="..." />
+                                    <img class="img-fluid rounded mb-5" src="assets/img/lab1/uuid.png" alt="..." />
                                     <h2 class="portfolio-title text-secondary mb-3" style="font-size: 2rem;">Task 1: Echo Command</h2>
-                                    <p class="mb-4 text-start">This </p>
-                                    <iframe class="mb-5" width="560" height="315" src="https://youtube.com/embed/X1HsQrllCZ8" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                                    <h2 class="portfolio-title text-secondary mb-3" style="font-size: 2rem;">Task 2: </h2>
-                                    <p class="mb-4 text-start">This </p>
+                                    <p class="mb-4 text-start">We need the Artemis Board to send and modify strings. To achieve this, I created an ECHO function. In the Arduino code, the function adds the prefix 'Robot says ->' to the original message before sending it. My code and results are shown below.</p>
+                                    <img class="img-fluid rounded mb-5" src="assets/img/lab1/echo_code.png" alt="..." />
+                                    <img class="img-fluid rounded mb-5" src="assets/img/lab1/echo_result.png" alt="..." />
+                                    <h2 class="portfolio-title text-secondary mb-3" style="font-size: 2rem;">Task 2: Send Three Floats</h2>
+                                    <p class="mb-4 text-start">We need the board to send floats as well. We created the SEND_THREE_FLOATS command to send three floats and extract the values in the Arduino sketch. The code and results are shown below.</p>
+                                    <img class="img-fluid rounded mb-5" src="assets/img/lab1/three_floats_code.png" alt="..." />
+                                    <img class="img-fluid rounded mb-5" src="assets/img/lab1/three_floats_ard.png" alt="..." />
+                                    <h2 class="portfolio-title text-secondary mb-3" style="font-size: 2rem;">Task 3: Get Time Millis</h2>
+                                    <p class="mb-4 text-start">Next, I created a command called GET_TIME_MILLIS and used the onboard timer to track and send timestamps through the Bluetooth connection. The two following screenshots show the Arduino code and the code with results on the Python side.</p>
+                                    <img class="img-fluid rounded mb-5" src="assets/img/lab1/case_time.png" alt="..." />
+                                    <img class="img-fluid rounded mb-5" src="assets/img/lab1/get_timepy.png" alt="..." />
+                                    
                                     <iframe class="mb-5" width="560" height="315" src="https://youtube.com/embed/X1HsQrllCZ8" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                                     
                                     <button class="btn btn-primary" data-bs-dismiss="modal">
