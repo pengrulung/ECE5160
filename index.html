@@ -327,17 +327,27 @@
                                     <p class="mb-4 text-start">Next, I set up a notification handler in order to receive strings from the Artemis board and extract the time value.</p>
                                     <img class="img-fluid rounded mb-5" src="assets/img/lab1/notifyhandlerpy.png" alt="..." />
                                     <h2 class="portfolio-title text-secondary mb-3" style="font-size: 2rem;">Task 5: Loop for Time Logging and Data Transfer Rate</h2>
-                                    <p class="mb-4 text-start">t</p>
-                                    <h2 class="portfolio-title text-secondary mb-3" style="font-size: 2rem;">Task 6:</h2>
-                                    <p class="mb-4 text-start">t</p>
-                                    <h2 class="portfolio-title text-secondary mb-3" style="font-size: 2rem;">Task 7:</h2>
-                                    <p class="mb-4 text-start">t</p>
-                                    <h2 class="portfolio-title text-secondary mb-3" style="font-size: 2rem;">Task 8:</h2>
-                                    <p class="mb-4 text-start">t</p>
+                                    <p class="mb-4 text-start">Then, I wrote a loop to continuously send time data with the code below. On the Python side, I collected the information from the notification handler. From the results below, we can see that the time ranges from 25,272 to 50,709, which is 25,437 milliseconds. We have 1,000 messages, and the size of each message is 7 bytes, so the effective rate is 
+                                        1000*7/25.437=275.18 bytes/s</p>
+                                    <img class="img-fluid rounded mb-5" src="assets/img/lab1/time_loop.png" alt="..." />
+                                    <img class="img-fluid rounded mb-5" src="assets/img/lab1/countmessage.png" alt="..." />
+                                    <h2 class="portfolio-title text-secondary mb-3" style="font-size: 2rem;">Task 6: Send Time Data With An Array</h2>
+                                    <p class="mb-4 text-start">I created a globally defined array to store timestamps. The SEND_TIME_DATA command first stores the timestamp in the array, then loops through the array and sends each data to my computer. The code for the SEND_TIME_DATA command and the result received by the computer are shown below</p>
+                                    <img class="img-fluid rounded mb-5" src="assets/img/lab1/send_time_data.png" alt="..." />
+                                    <img class="img-fluid rounded mb-5" src="assets/img/lab1/receive_time_data.png" alt="..." />
+                                    <h2 class="portfolio-title text-secondary mb-3" style="font-size: 2rem;">Task 7: Get Temperature Readings</h2> 
+                                    <img class="img-fluid rounded mb-5" src="assets/img/lab1/send_time_temp.png" alt="..." />
+                                    <img class="img-fluid rounded mb-5" src="assets/img/lab1/receive_time_temp.png" alt="..." />
+                                    <p class="mb-4 text-start">Next, I added a second array of the same size as the timestamp array to store temperature data. I created a command, GET_TEMP_READINGS, to collect both time and temperature readings and store them in both arrays. Then, I merged the two arrays and sent the combined data to the computer. The code for GET_TEMP_READINGS and the results are shown below.</p>
+                                    <h2 class="portfolio-title text-secondary mb-3" style="font-size: 2rem;">Task 8: Discussion</h2>
+                                    <p class="mb-4 text-start">Live data transmission provides real-time updates but comes with higher overhead, potential data loss, and BLE speed limitations. It's suitable for small data points and systems that can handle interruptions. Storing data for later transmission ensures reliability, reduces data loss, and is more robust in unstable conditions, but requires more memory and introduces delays.</p>
                                     <h2 class="portfolio-title text-secondary mb-3" style="font-size: 2rem;">Additional tasks: Effective Data Rate And Overhead</h2>
-                                    <p class="mb-4 text-start">t</p>                                   
+                                    <p class="mb-4 text-start">t</p>   
+                                    <img class="img-fluid rounded mb-5" src="assets/img/lab1/different_bytes_testing.png" alt="..." />
+                                    <img class="img-fluid rounded mb-5" src="assets/img/lab1/bytes_plot.png" alt="..." />                                
                                     <h2 class="portfolio-title text-secondary mb-3" style="font-size: 2rem;">Additional tasks: Reliability</h2>
                                     <p class="mb-4 text-start">t</p>
+                                    <img class="img-fluid rounded mb-5" src="assets/img/lab1/reliability_result.png" alt="..." />
 
                                     <iframe class="mb-5" width="560" height="315" src="https://youtube.com/embed/X1HsQrllCZ8" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                                     
