@@ -80,7 +80,7 @@
                             <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
                                 <div class="portfolio-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i></div>
                             </div>
-                            <img class="img-fluid" src="assets/img/portfolio/cake.png" alt="..." />
+                            <img class="img-fluid" src="assets/img/portfolio/IMU.jpg" alt="..." />
                         </div>
                         <p class="text-center mt-2 fs-4 fw-bold">Lab2</p> 
                     </div>
@@ -372,7 +372,8 @@
                             <div class="row justify-content-center">
                                 <div class="col-lg-8">
                                     <!-- Portfolio Modal - Title-->
-                                    <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">Tasty Cake</h2>
+                                    <h2 class="portfolio-modal-title text-secondary text-uppercase mb-2">Lab 2</h2>
+                                    <h2 class="portfolio-title text-secondary mb-0">IMU</h2>
                                     <!-- Icon Divider-->
                                     <div class="divider-custom">
                                         <div class="divider-custom-line"></div>
@@ -380,8 +381,37 @@
                                         <div class="divider-custom-line"></div>
                                     </div>
                                     <!-- Portfolio Modal - Image-->
-                                    <img class="img-fluid rounded mb-5" src="assets/img/portfolio/cake.png" alt="..." />
+                                    <img class="img-fluid rounded mb-5" src="assets/img/portfolio/IMU.jpg" alt="..." />
                                     <!-- Portfolio Modal - Text-->
+                                    <h2 class="portfolio-title text-secondary mb-3">Objective</h2>
+                                    <p class="mb-0 text-start">The purpose of this lab was to test the IMU sensor, which includes an accelerometer, gyroscope, and magnetometer. We also received our actual robots and observed their capabilities.</p>
+                                    <h2 class="portfolio-title text-secondary mb-3"style="font-size: 2rem;">Prelab</h2>                                    
+                                    <p class="mb-4 text-start">/need </p>
+                                    <h2 class="portfolio-title text-secondary mb-3" style="font-size: 2rem;">Task 1: Set up the IMU</h2>
+                                    <p class="mb-4 text-start">First, I connect the IMU to the Artemis board using the QWIIC connector, which is shown in the photo below.</p>
+                                    <img class="img-fluid rounded mb-5" src="assets/img/lab2/IMU_connect.jpg" alt="..." />
+                                    <p class="mb-4 text-start">checkNext, I test the IMU works using the Example Code with rotating, flipping, and accelerating the IMU, which is shown in the video below.</p>
+                                    <iframe class="mb-5" width="560" height="315" src="https://youtube.com/embed/hwIPIpXenis" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                    <p class="mb-4 text-start">The AD0_VAL represents the last bit of the I2C address in the IMU. I set AD0_VAL to 1, which is the default. However, it can be changed to 0 when the ADR jumper is closed, which is useful when using multiple IMUs.</p>
+                                    <p class="mb-4 text-start">The accelerometer measures linear acceleration. When the board is flat on a table, X and Y accelerations are minimal, while Z is around 1000 due to gravity (9.8 m/s²). The X, Y, and Z values change as the device moves along each axis. The gyroscope measures angular velocity. It outputs approximately zero when still but responds on the corresponding axis when the board rotates.</p>
+                                    <p class="mb-4 text-start">I added a visual indication to show that the board is running by blinking the LED three times on startup. I did this using the example code 'blink' from Lab 1, as shown in the video below.</p>
+                                    <iframe class="mb-5" width="560" height="315" src="https://youtube.com/embed/BAaN60yAh2E" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                    <h2 class="portfolio-title text-secondary mb-3" style="font-size: 2rem;">Task 2: Accelerometer</h2>
+                                    <p class="mb-4 text-start">With the accelerometer, we can calculate &theta; with the equation &theta;=artan(a<sub>y</sub>,a<sub>z</sub>), and also &psi;=artan(a<sub>x</sub>,a<sub>z</sub>). Since the result is in radians, so we need to multiple 180 and divide pi to get the degree value. The Arduino code for this is shown below.</p>
+                                    <img class="img-fluid rounded mb-5" src="assets/img/lab2/equation.png" alt="..." />
+                                    <p class="mb-4 text-start">I tested the pitch and roll at {-90, 0, 90} degrees, with the results shown below.</p>
+                                    <p class="mb-4 text-start">Pitch=0, Roll=0 /need </p>
+                                    <img class="img-fluid rounded mb-5" src="assets/img/lab2/roll_0_degree.png" alt="..." width="80%"/>
+                                    <img class="img-fluid rounded mb-5" src="assets/img/lab2/pitch_90_degree.png" alt="..." width="80%"/>
+                                    <img class="img-fluid rounded mb-5" src="assets/img/lab2/pitch__90_degree.png" alt="..." width="80%"/>
+                                    <img class="img-fluid rounded mb-5" src="assets/img/lab2/roll_0_degree.png" alt="..." width="80%"/>
+                                    <img class="img-fluid rounded mb-5" src="assets/img/lab2/roll_90_degree.png" alt="..." width="80%"/>
+                                    <img class="img-fluid rounded mb-5" src="assets/img/lab2/roll__90_degree.png" alt="..." width="80%"/>
+                                    <p class="mb-4 text-start">/need </p>
+                                    <p class="mb-4 text-start">Noise in the frequency spectrum analysis(graph and result)</p>
+                                    <h2 class="portfolio-title text-secondary mb-3" style="font-size: 2rem;">Task 3: Gyroscope</h2>
+                                    <h2 class="portfolio-title text-secondary mb-3" style="font-size: 2rem;">Task 4: Sample Data</h2>
+                                    <h2 class="portfolio-title text-secondary mb-3" style="font-size: 2rem;">Task 5: Record a Stunt</h2>
                                     <p class="mb-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia neque assumenda ipsam nihil, molestias magnam, recusandae quos quis inventore quisquam velit asperiores, vitae? Reprehenderit soluta, eos quod consequuntur itaque. Nam.</p>
                                     <button class="btn btn-primary" data-bs-dismiss="modal">
                                         <i class="fas fa-xmark fa-fw"></i>
