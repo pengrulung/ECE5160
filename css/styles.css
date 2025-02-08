@@ -603,6 +603,17 @@ progress {
   height: auto;
 }
 
+.img-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.img-fluid-side {
+  max-width: 48%;  /* Adjust width for side-by-side */
+  height: auto;
+}
+
+
 .img-thumbnail {
   padding: 0.25rem;
   background-color: #fff;
@@ -2118,6 +2129,10 @@ textarea.form-control-sm {
 }
 textarea.form-control-lg {
   min-height: calc(1.5em + 1.25rem);
+}
+
+.roll-text {
+  margin-right: 310px; /* Adjust this value as needed */
 }
 
 .form-control-color {

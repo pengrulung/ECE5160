@@ -384,9 +384,9 @@
                                     <img class="img-fluid rounded mb-5" src="assets/img/portfolio/IMU.jpg" alt="..." />
                                     <!-- Portfolio Modal - Text-->
                                     <h2 class="portfolio-title text-secondary mb-3">Objective</h2>
-                                    <p class="mb-0 text-start">The purpose of this lab was to test the IMU sensor, which includes an accelerometer, gyroscope, and magnetometer. We also received our actual robots and observed their capabilities.</p>
+                                    <p class="mb-4 text-start">The purpose of this lab was to test the IMU sensor, which includes an accelerometer, gyroscope, and magnetometer. We also received our actual robots and observed their capabilities.</p>
                                     <h2 class="portfolio-title text-secondary mb-3"style="font-size: 2rem;">Prelab</h2>                                    
-                                    <p class="mb-4 text-start">/need </p>
+                                    <p class="mb-4 text-start">To prepare for this lab, I read about the IMU and familiarized myself with its functionality.</p>
                                     <h2 class="portfolio-title text-secondary mb-3" style="font-size: 2rem;">Task 1: Set up the IMU</h2>
                                     <p class="mb-4 text-start">First, I connect the IMU to the Artemis board using the QWIIC connector, which is shown in the photo below.</p>
                                     <img class="img-fluid rounded mb-5" src="assets/img/lab2/IMU_connect.jpg" alt="..." />
@@ -400,19 +400,67 @@
                                     <p class="mb-4 text-start">With the accelerometer, we can calculate &theta; with the equation &theta;=artan(a<sub>x</sub>,a<sub>z</sub>), and also &psi;=artan(a<sub>y</sub>,a<sub>z</sub>). Since the result is in radians, so we need to multiple 180 and divide pi to get the degree value. The Arduino code for this is shown below.</p>
                                     <img class="img-fluid rounded mb-5" src="assets/img/lab2/equation.png" alt="..." />
                                     <p class="mb-4 text-start">I placed the board flat on the table and rotated it in different directions, testing the pitch and roll at {-90, 0, 90} degrees. The results are shown below.</p>
-                                    <p class="mb-4 text-start">Pitch=0, Roll=0</p>
-                                    <img class="img-fluid rounded mb-5" src="assets/img/lab2/roll_0_degree.png" alt="..." width="80%"/>
-                                    <p class="mb-4 text-start">Pitch=90</p>
-                                    <img class="img-fluid rounded mb-5" src="assets/img/lab2/pitch_90_degree.png" alt="..." width="80%"/>
-                                    <p class="mb-4 text-start">Pitch=-90</p>
-                                    <img class="img-fluid rounded mb-5" src="assets/img/lab2/pitch__90_degree.png" alt="..." width="80%"/>
-                                    <p class="mb-4 text-start">Pitch=0, Roll=0</p>
-                                    <img class="img-fluid rounded mb-5" src="assets/img/lab2/roll_0_degree.png" alt="..." width="80%"/>
-                                    <p class="mb-4 text-start">Roll=90</p>
-                                    <img class="img-fluid rounded mb-5" src="assets/img/lab2/roll_90_degree.png" alt="..." width="80%"/>
-                                    <p class="mb-4 text-start">Roll=-90</p>
-                                    <img class="img-fluid rounded mb-5" src="assets/img/lab2/roll__90_degree.png" alt="..." width="80%"/>
-                                    <p class="mb-4 text-start">/need </p>
+                                    <p class="mb-2 text-align: center">Pitch=0, Roll=0</p>
+                                    <img class="img-fluid rounded mb-5" src="assets/img/lab2/roll_0_degree.png" alt="..." width="70%"/>
+                                    <p class="mb-2 text-start">
+                                        <span class="roll-text">Roll=90</span>
+                                        <span>Roll=-90</span>
+                                    </p>
+                                    <div class="img-container">
+                                    <img class="img-fluid-side rounded mb-5" src="assets/img/lab2/roll__90_degree.png" alt="..." width="80%"/>
+                                    <img class="img-fluid-side rounded mb-5" src="assets/img/lab2/roll_90_degree.png" alt="..." width="80%"/>
+                                    </div>
+                                    <p class="mb-2 text-start">
+                                        <span class="roll-text">Pitch=90</span>
+                                        <span>Pitch=-90</span>
+                                    </p>
+                                    <div class="img-container">
+                                    <img class="img-fluid-side rounded mb-5" src="assets/img/lab2/pitch_90_degree.png" alt="..." width="80%"/>
+                                    <img class="img-fluid-side rounded mb-5" src="assets/img/lab2/pitch__90_degree.png" alt="..." width="80%"/>
+                                    </div>
+                                    <p class="mb-2 text-start">To prepare for future labs, I wrote a function in Jupyter where the computer sends requests, and the Arduino replies with data. The data is then plotted on a graph with time on the x-axis and data on the y-axis. The code and result are shown below.</p>
+                                    <div class="img-container">
+                                    <img class="img-fluid rounded mb-5" src="assets/img/lab2/jupyter.png" alt="..." />
+                                    <img class="img-fluid rounded mb-5" src="assets/img/lab2/ju_plot.png" alt="..." />  
+                                    </div>
+                                    <div class="img-container">
+                                    <img class="img-fluid-side rounded mb-5" src="assets/img/lab2/Pitch_ju.png" alt="..." width="80%"/>
+                                    <img class="img-fluid-side rounded mb-5" src="assets/img/lab2/Roll_ju.png" alt="..." width="80%"/>
+                                    </div>                                                                     
+                                    <p class="mb-4 text-start">I performed a two-point calibration by positioning the board at 90° and -90°(against the wall) for roll and pitch with specific rotation directions. Using the IMU measurements, I obtained the accelerometer readings for the X, Y, and Z axes, calculated the angles, and compared them with the ideal values. The plot below shows that the error is very small.</p>
+                                    <div class="img-container">
+                                    <img class="img-fluid-side rounded mb-5" src="assets/img/lab2/Pitch.png" alt="..." style="display: inline-block; " />
+                                    <img class="img-fluid-side rounded mb-5" src="assets/img/lab2/Roll.png" alt="..." style="display: inline-block; " />
+                                    </div>
+                                    <p class="mb-4 text-start">From the two-point calibration, we can use the formula:<br>
+                                    CorrectedValue = (((RawValue-RawLow) * ReferenceRange) / RawRange) + ReferenceLow<br>
+                                    to understand how roll and pitch can be corrected based on the raw computed angles. <br>
+                                    The equation for roll is:<br>
+                                    CorrectedValue = (((RawValue - 90) * 180) / 180.849) - 90<br>
+                                    and the equation for pitch is:<br>
+                                    CorrectedValue = (((RawValue - 90) * 180) / 177.548) - 90</p>
+                                    <p class="mb-4 test-start">The data from the accelerometer was noisy even when it was not moving. If the accelerometer was placed on the car, the data would become even noisier, so it was important to remove the noise. The first step was performing a Fourier Transform to select a cutoff frequency. I did this in the Jupyter notebook using the numpy, scipy, and matplotlib packages. The images below show the original angle and the FFT.</p>
+                                    <div class="img-container">
+                                        <img class="img-fluid-side rounded mb-5" src="assets/img/lab2/Pitch_ju.png" alt="..." style="display: inline-block; " />
+                                        <img class="img-fluid-side rounded mb-5" src="assets/img/lab2/fft_pitch.png" alt="..." style="display: inline-block; " />
+                                        </div>
+                                    <div class="img-container">
+                                        <img class="img-fluid-side rounded mb-5" src="assets/img/lab2/Roll_ju.png" alt="..." style="display: inline-block; " />
+                                        <img class="img-fluid-side rounded mb-5" src="assets/img/lab2/fft_roll.png" alt="..." style="display: inline-block; " />
+                                        </div>
+                                    <p class="mb-4 text-start">Based on the FFT result shown in the graph, the most significant spikes occur between 1-3 Hz, so I set the cutoff frequency at 3 Hz. Using the formula: <br>
+                                        &alpha; = T/(T + RC), where RC=1/2&pi;f<sub>c</sub>, and T=1/sampling_rate. <br>
+                                        Given that the sampling rate is 49.09 Hz. I calculated the value of &alpha;, which is approximately 0.2774.
+                                    </p>
+                                    <p class="mb-4 text-start">With the low pass filter, the equation is:<br>
+                                    &theta;<sub>LPF</sub>[n]=&theta;*&theta;<sub>RAW</sub>+(1-&theta;)*&theta;<sub>LPF</sub>[n-1]<br>
+                                    &theta;<sub>LPF</sub>[n-1]=&theta;<sub>LPF</sub>[n]<br>
+                                    By applying this, we can obtain the data with the low-pass filter. The graph below shows the original data and the filtered data.
+                                    </p> 
+                                    <div class="img-container">
+                                        <img class="img-fluid-side rounded mb-5" src="assets/img/lab2/lf_pitch.png" alt="..." style="display: inline-block; " />
+                                        <img class="img-fluid-side rounded mb-5" src="assets/img/lab2/lf_roll.png" alt="..." style="display: inline-block; " />
+                                        </div>
                                     <p class="mb-4 text-start">Noise in the frequency spectrum analysis(graph and result)</p>
                                     <h2 class="portfolio-title text-secondary mb-3" style="font-size: 2rem;">Task 3: Gyroscope</h2>
                                     <h2 class="portfolio-title text-secondary mb-3" style="font-size: 2rem;">Task 4: Sample Data</h2>
