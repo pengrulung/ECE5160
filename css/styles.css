@@ -613,6 +613,11 @@ progress {
   height: auto;
 }
 
+.img-fluid-three {
+  max-width: 32%;  /* Adjust width for side-by-side */
+  height: auto;
+}
+
 
 .img-thumbnail {
   padding: 0.25rem;

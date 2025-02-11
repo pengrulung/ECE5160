@@ -439,7 +439,7 @@
                                     CorrectedValue = (((RawValue - 90) * 180) / 180.849) - 90<br>
                                     and the equation for pitch is:<br>
                                     CorrectedValue = (((RawValue - 90) * 180) / 177.548) - 90</p>
-                                    <p class="mb-4 test-start">The data from the accelerometer was noisy even when it was not moving. If the accelerometer was placed on the car, the data would become even noisier, so it was important to remove the noise. The first step was performing a Fourier Transform to select a cutoff frequency. I did this in the Jupyter notebook using the numpy, scipy, and matplotlib packages. The images below show the original angle and the FFT.</p>
+                                    <p class="mb-4 text-start">The accelerometer data was noisy, and placing it on a car would increase noise further. To reduce this, I collected data (by randomly shaking the board) and performed a Fourier Transform in Jupyter Notebook using NumPy, SciPy, and Matplotlib to determine the cutoff frequency. The images below show the original angle data and its FFT result for analysis.</p>
                                     <div class="img-container">
                                         <img class="img-fluid-side rounded mb-5" src="assets/img/lab2/Pitch_ju.png" alt="..." style="display: inline-block; " />
                                         <img class="img-fluid-side rounded mb-5" src="assets/img/lab2/fft_pitch.png" alt="..." style="display: inline-block; " />
@@ -455,15 +455,56 @@
                                     <p class="mb-4 text-start">With the low pass filter, the equation is:<br>
                                     &theta;<sub>LPF</sub>[n]=&theta;*&theta;<sub>RAW</sub>+(1-&theta;)*&theta;<sub>LPF</sub>[n-1]<br>
                                     &theta;<sub>LPF</sub>[n-1]=&theta;<sub>LPF</sub>[n]<br>
-                                    By applying this, we can obtain the data with the low-pass filter. The graph below shows the original data and the filtered data.
-                                    </p> 
+                                    By applying this, we can obtain the data with the low-pass filter. The graph below compares the original and filtered data, showing reduced vibration in the filtered signal, which also confirms that the selected cutoff frequency effectively removes unwanted noise without distorting the primary motion data.</p>
                                     <div class="img-container">
                                         <img class="img-fluid-side rounded mb-5" src="assets/img/lab2/lf_pitch.png" alt="..." style="display: inline-block; " />
                                         <img class="img-fluid-side rounded mb-5" src="assets/img/lab2/lf_roll.png" alt="..." style="display: inline-block; " />
                                         </div>
-                                    <p class="mb-4 text-start">Noise in the frequency spectrum analysis(graph and result)</p>
+                                    <p class="mb-4 text-start">Using the low-pass filter, we can observe that the signal’s vibration decreases. To be more precise, I placed the IMU on a table and induced noise by gently tapping the table. Below are the original data, its FFT, and the low-pass filtered data. The comparison shows that the filter removes high-frequency noise while preserving motion data.</p>
+                                    <div class="img-container">
+                                        <img class="img-fluid-side rounded mb-5" src="assets/img/lab2/roll_flat_fft.png" alt="..." style="display: inline-block; " />
+                                        <img class="img-fluid-side rounded mb-5" src="assets/img/lab2/roll_flat.png" alt="..." style="display: inline-block; " />
+                                        </div>
+                                    <div class="img-container">
+                                        <img class="img-fluid-side rounded mb-5" src="assets/img/lab2/pitch_flat_fft.png" alt="..." style="display: inline-block; " />
+                                        <img class="img-fluid-side rounded mb-5" src="assets/img/lab2/pitch_flat.png" alt="..." style="display: inline-block; " />
+                                        </div>
                                     <h2 class="portfolio-title text-secondary mb-3" style="font-size: 2rem;">Task 3: Gyroscope</h2>
+                                    <p class="mb-4 text-start">Using the gyroscope data, we can calculate the raw pitch, roll, and yaw by updating the angles as follows:<br>
+                                        pitch_g = pitch_g + myICM.gyrY() * dt <br>
+                                        roll_g = roll_g + myICM.gyrX() * dt <br>
+                                        yaw_g = yaw_g + myICM.gyrZ() * dt <br>
+                                    </p>
+                                    <p class="mb-4 text-start">With a sampling rate of approximately 422Hz, we can generate three plots: one showing the roll, pitch, and yaw from the gyroscope; one displaying the roll from both the gyroscope and accelerometer, along with the low-pass filtered accelerometer data; and another showing the pitch from both the gyroscope and accelerometer, along with the low-pass filtered accelerometer data.</p>
+                                    <div class="img-container">
+                                        <img class="img-fluid-three rounded mb-5" src="assets/img/lab2/400_gyro.png" alt="..." style="display: inline-block; " />
+                                        <img class="img-fluid-three rounded mb-5" src="assets/img/lab2/400_r.png" alt="..." style="display: inline-block; " />
+                                        <img class="img-fluid-three rounded mb-5" src="assets/img/lab2/400_p.png" alt="..." style="display: inline-block; " />
+                                        </div>
+                                    <p class="mb-4 text-start">With a sampling rate of approximately 153.5Hz, I generate the following results shown below.</p>
+                                    <div class="img-container">
+                                        <img class="img-fluid-three rounded mb-5" src="assets/img/lab2/15_gyro.png" alt="..." style="display: inline-block; " />
+                                        <img class="img-fluid-three rounded mb-5" src="assets/img/lab2/15_r.png" alt="..." style="display: inline-block; " />
+                                        <img class="img-fluid-three rounded mb-5" src="assets/img/lab2/15_p.png" alt="..." style="display: inline-block; " />
+                                        </div>
+                                        <p class="mb-4 text-start">With a sampling rate of approximately 32.91 Hz, with the movement rotating the board around the x-axis from 0° to 90° twice, followed by a rotation around the y-axis from 0° to -90° once, I generated the following results shown below.</p>
+                                        <div class="img-container">
+                                            <img class="img-fluid-three rounded mb-5" src="assets/img/lab2/32_gyro.png" alt="..." style="display: inline-block; " />
+                                            <img class="img-fluid-three rounded mb-5" src="assets/img/lab2/32_r.png" alt="..." style="display: inline-block; " />
+                                            <img class="img-fluid-three rounded mb-5" src="assets/img/lab2/32_p.png" alt="..." style="display: inline-block; " />
+                                            </div>
+                                    <p class="mb-4 text-start">The accelerometer is noisy, especially at high sampling rates, but at lower sampling rates, the noise is less pronounced and not affected by drift. The gyroscope excels at detecting fast movements since it's less influenced by noise. Therefore, a complementary filter can be used to combine the strengths of both sensors.</p> 
+                                    <p class="mb-4 text-start">I use a complementary filter to compute an estimate of pitch and roll that is both accurate and stable, using the equation shown below.<br>
+                                        &theta;=(&theta;+&theta;<sub>g</sub>)(1-&alpha;)+&theta;<sub>a</sub>&alpha;<br>
+                                        I tested by rotating the board around the x-axis from 0° to 90° twice, followed by a rotation around the y-axis from 0° to -90° once. I then compared the original accelerometer data, low-pass filtered accelerometer data, gyroscope data, and the complementary filter output with alpha values of 0.7 and 0.3.
+                                    <p>
+                                    <div class="img-container">
+                                        <img class="img-fluid-side rounded mb-5" src="assets/img/lab2/Comp_Roll.png" alt="..." style="display: inline-block; " />
+                                        <img class="img-fluid-side rounded mb-5" src="assets/img/lab2/Comp_Pitch.png" alt="..." style="display: inline-block; " />
+                                        </div>
+                                    <p class="mb-4 text-start">When alpha is large, the filter relies more on the accelerometer, reducing drift but increasing noise, making it suitable for static applications. When alpha is small, it relies more on the gyroscope, reducing vibrations and noise, but increasing drift, making it ideal for fast-moving environments.</p>
                                     <h2 class="portfolio-title text-secondary mb-3" style="font-size: 2rem;">Task 4: Sample Data</h2>
+                                    <p class="mb-4 text-start">I sampled data 200 times without any Serial.print, only checking readiness, and storing it in an array. I measured the start and end times, with the sampling rate calculated as 397.61 Hz. Also, when the data was not ready, I incremented a variable count. The result showed count = 0, which means that as soon as the program started running, the data was already prepared. This indicates that the IMU updates faster than the Artemis main loop.</p>
                                     <h2 class="portfolio-title text-secondary mb-3" style="font-size: 2rem;">Task 5: Record a Stunt</h2>
                                     <p class="mb-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia neque assumenda ipsam nihil, molestias magnam, recusandae quos quis inventore quisquam velit asperiores, vitae? Reprehenderit soluta, eos quod consequuntur itaque. Nam.</p>
                                     <button class="btn btn-primary" data-bs-dismiss="modal">
