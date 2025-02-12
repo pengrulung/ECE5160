@@ -80,7 +80,7 @@
                             <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
                                 <div class="portfolio-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i></div>
                             </div>
-                            <img class="img-fluid" src="assets/img/portfolio/IMU.jpg" alt="..." />
+                            <img class="img-fluid" src="assets/img/portfolio/IMU.png" alt="..." />
                         </div>
                         <p class="text-center mt-2 fs-4 fw-bold">Lab2</p> 
                     </div>
@@ -381,7 +381,7 @@
                                         <div class="divider-custom-line"></div>
                                     </div>
                                     <!-- Portfolio Modal - Image-->
-                                    <img class="img-fluid rounded mb-5" src="assets/img/portfolio/IMU.jpg" alt="..." />
+                                    <img class="img-fluid rounded mb-5" src="assets/img/portfolio/IMU.png" alt="..." />
                                     <!-- Portfolio Modal - Text-->
                                     <h2 class="portfolio-title text-secondary mb-3">Objective</h2>
                                     <p class="mb-4 text-start">The purpose of this lab was to test the IMU sensor, which includes an accelerometer, gyroscope, and magnetometer. We also received our actual robots and observed their capabilities.</p>
@@ -504,9 +504,18 @@
                                         </div>
                                     <p class="mb-4 text-start">When alpha is large, the filter relies more on the accelerometer, reducing drift but increasing noise, making it suitable for static applications. When alpha is small, it relies more on the gyroscope, reducing vibrations and noise, but increasing drift, making it ideal for fast-moving environments.</p>
                                     <h2 class="portfolio-title text-secondary mb-3" style="font-size: 2rem;">Task 4: Sample Data</h2>
-                                    <p class="mb-4 text-start">I sampled data 200 times without any Serial.print, only checking readiness, and storing it in an array. I measured the start and end times, with the sampling rate calculated as 397.61 Hz. Also, when the data was not ready, I incremented a variable count. The result showed count = 0, which means that as soon as the program started running, the data was already prepared. This indicates that the IMU updates faster than the Artemis main loop.</p>
+                                    <p class="mb-4 text-start">I sampled data 200 times without any Serial.print, only checking readiness, and storing it in an array. I measured the start and end times, with the sampling rate calculated as 435 Hz. Also, when the data was not ready, I incremented a variable count. The result showed count = 0, which means that as soon as the program started running, the data was already prepared. This indicates that the IMU updates faster than the Artemis main loop. The code below shows how I measured the time gap to calculate the sampling rate.</p>
+                                    <img class="img-fluid rounded mb-5" src="assets/img/lab2/get_data_sampling_rate.png" alt="..." style="display: inline-block; " />
+                                    <img class="img-fluid rounded mb-5" src="assets/img/lab2/sampling_rate.png" alt="..." style="display: inline-block; " />
+                                    <p class="mb-4 text-start">I also conducted a test where I stored the time after one sample and recorded the time before the IMU was ready for the next sample to determine how quickly new values could be sampled. The result was approximately few milliseconds.</p>
+                                    <p class="mb-4 text-start">Next, I added flags to start/stop data recording, with Jupyter sending control signals to collect and store time-stamped IMU data in arrays within the main loop. The screenshots below show my code and the result (I set it to print the number of measurements taken to calculate the sampling rate).</p>
+                                    <img class="img-fluid rounded mb-5" src="assets/img/lab2/start_end.png" alt="..." style="display: inline-block; " />
+                                    <p class="mb-4 text-start">I need to store at least 5 seconds of data. Each 32B measurement includes acceleration (float), angle values (float), and a timestamp (int). With 384kB of memory, I can store 12,000 measurements. At ~330 Hz (slightly reduced due to storage and stop command handling), this allows ~33 seconds of recording.</p>
+                                    <img class="img-fluid rounded mb-5" src="assets/img/lab2/loop_array.png" alt="..." style="display: inline-block; " />
+                                    <img class="img-fluid rounded mb-5" src="assets/img/lab2/count.png" alt="..." style="display: inline-block; " />                                   
                                     <h2 class="portfolio-title text-secondary mb-3" style="font-size: 2rem;">Task 5: Record a Stunt</h2>
-                                    <p class="mb-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia neque assumenda ipsam nihil, molestias magnam, recusandae quos quis inventore quisquam velit asperiores, vitae? Reprehenderit soluta, eos quod consequuntur itaque. Nam.</p>
+                                    <p class="mb-4 text-start">I tested my car by driving it straight, moving backward, and turning right and left. I also tested its ability to move forward and turn, as well as move backward and turn. Based on my observations, the acceleration and spinning work well. It runs very fast at full speed, but the braking is quite weak. Also, when attempting to move straight, the movement is not perfectly straight, so I may need to implement some calibration in future labs.</p>
+                                    <iframe class="mb-5" width="560" height="315" src="https://youtube.com/embed/8d8gFPNYt0s" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                                     <button class="btn btn-primary" data-bs-dismiss="modal">
                                         <i class="fas fa-xmark fa-fw"></i>
                                         Close Window
