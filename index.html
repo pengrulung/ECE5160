@@ -90,7 +90,7 @@
                             <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
                                 <div class="portfolio-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i></div>
                             </div>
-                            <img class="img-fluid" src="assets/img/portfolio/circus.png" alt="..." />
+                            <img class="img-fluid" src="assets/img/portfolio/Tof.png" alt="..." />
                         </div>
                         <p class="text-center mt-2 fs-4 fw-bold">Lab3</p> 
                     </div>
@@ -537,7 +537,8 @@
                             <div class="row justify-content-center">
                                 <div class="col-lg-8">
                                     <!-- Portfolio Modal - Title-->
-                                    <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">Circus Tent</h2>
+                                    <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">Lab 3</h2>
+                                    <h2 class="portfolio-title text-secondary mb-0">Time of Flight Sensors</h2>
                                     <!-- Icon Divider-->
                                     <div class="divider-custom">
                                         <div class="divider-custom-line"></div>
@@ -545,9 +546,33 @@
                                         <div class="divider-custom-line"></div>
                                     </div>
                                     <!-- Portfolio Modal - Image-->
-                                    <img class="img-fluid rounded mb-5" src="assets/img/portfolio/circus.png" alt="..." />
+                                    <img class="img-fluid rounded mb-5" src="assets/img/portfolio/Tof.png" alt="..." />
                                     <!-- Portfolio Modal - Text-->
-                                    <p class="mb-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia neque assumenda ipsam nihil, molestias magnam, recusandae quos quis inventore quisquam velit asperiores, vitae? Reprehenderit soluta, eos quod consequuntur itaque. Nam.</p>
+                                    <h2 class="portfolio-title text-secondary mb-3">Objective</h2>
+                                    <p class="mb-4 text-start">The purpose of this lab is to equip our robots with distance sensors to detect surrounding objects.</p>
+                                    <h2 class="portfolio-title text-secondary mb-3"style="font-size: 2rem;">Prelab</h2>
+                                    <p class="mb-4 text-start">Both ToF sensors default to the same address 0x52. If both communicate simultaneously, a bus collision occurs. However, since their addresses are programmable, we can use the XSHUT pin to disable one, set a new address for the other, and then use independent addresses.</p>
+                                    <p class="mb-4 text-start">To prepare for this lab, I designed my wiring diagrams, as shown below.</p>
+                                    <img class="img-fluid rounded mb-5" src="assets/img/lab3/wire.jpg" alt="..." />
+                                    <p class="mb-4 text-start">My robot will use two ToF sensors—one in front for obstacle detection and one on the side for rotation data, as shown in the diagram below. This may sacrifice rear detection, but since it's the path traveled, it should be acceptable. Mounting may be adjusted based on future results.</p>
+                                    <img class="img-fluid rounded mb-5" src="assets/img/lab3/car_tof.jpg" alt="..." />
+                                    <p class="mb-4 text-start">Since ToF sensors require more flexible placement than the IMU, I chose long QWIIC cables to allow for better positioning on the robot.</p>                                    
+                                    <h2 class="portfolio-title text-secondary mb-3" style="font-size: 2rem;">Task 1: Picture of ToF sensor connected to QWIIC breakout board</h2>
+                                    <p class="mb-4 text-start">First, I connected the ToF sensor to the QWIIC breakout board to verify that it works.</p>
+                                    <img class="img-fluid rounded mb-5" src="assets/img/lab3/Tof_wire.jpg" alt="..." />
+                                    <h2 class="portfolio-title text-secondary mb-3" style="font-size: 2rem;">Task 2: Screenshot of Artemis scanning for I2C device</h2>
+                                    <p class="mb-4 text-start">I obtained the I2C address by running an example program in Arduino.</p>
+                                    <img class="img-fluid rounded mb-5" src="assets/img/lab3/Tof_address.png" alt="..." />
+                                    <p class="mb-4 text-start">It shows that the address is 0x29, which does not match the default (0x52). However, we can see that 0x29 is derived from 0x52 >> 1. The last bit of the I2C address indicates 0 for a write and 1 for a read, so only the first 7 bits are considered.</p>
+                                    <h2 class="portfolio-title text-secondary mb-3" style="font-size: 2rem;">Task 3: Discussion and pictures of sensor data with chosen mode</h2>
+                                    <h2 class="portfolio-title text-secondary mb-3" style="font-size: 2rem;">Task 4: 2 ToF sensors and the IMU: Discussion and screenshot/video of sensors working in parallel</h2>
+                                    <h2 class="portfolio-title text-secondary mb-3" style="font-size: 2rem;">Task 5: Tof sensor speed: Discussion on speed and limiting factor; include code snippet of how you do this</h2>
+                                    <h2 class="portfolio-title text-secondary mb-3" style="font-size: 2rem;">Task 6: Time v Distance</h2>
+                                    <h2 class="portfolio-title text-secondary mb-3" style="font-size: 2rem;">Task 7: Time v Angle</h2>
+                                    <h2 class="portfolio-title text-secondary mb-3" style="font-size: 2rem;">Task 8: Screenshot of Artemis scanning for I2C device</h2>
+                                    <h2 class="portfolio-title text-secondary mb-3" style="font-size: 2rem;">Additional Tasks: Discussion on infrared transmission based sensors</h2>
+                                    <h2 class="portfolio-title text-secondary mb-3" style="font-size: 2rem;">Additional Tasks: Sensitivity of sensors to colors and textures</h2>                                  
+                                    <p class="mb-4 text-start">Lorem ipsum</p>
                                     <button class="btn btn-primary" data-bs-dismiss="modal">
                                         <i class="fas fa-xmark fa-fw"></i>
                                         Close Window
