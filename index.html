@@ -554,7 +554,7 @@
                                     <p class="mb-4 text-start">Both ToF sensors default to the same address 0x52. If both communicate simultaneously, a bus collision occurs. However, since their addresses are programmable, we can use the XSHUT pin to disable one, set a new address for the other, and then use independent addresses.</p>
                                     <p class="mb-4 text-start">To prepare for this lab, I designed my wiring diagrams, as shown below.</p>
                                     <img class="img-fluid rounded mb-5" src="assets/img/lab3/wire.jpg" alt="..." />
-                                    <p class="mb-4 text-start">My robot will use two ToF sensors—one in front for obstacle detection and one on the side for rotation data, as shown in the diagram below. This may sacrifice rear detection, but since it's the path traveled, it should be acceptable. Mounting may be adjusted based on future results.</p>
+                                    <p class="mb-4 text-start">My robot will use two ToF sensors—one in the front for obstacle detection and one in the back for rear detection, as shown in the diagram below. At the same time, I am also considering whether placing sensors on the sides would help with rotation. However, assuming that the wheels may influence rotation detection, I chose not to place ToF sensors on the sides. The mounting position may be adjusted based on future results.</p>
                                     <img class="img-fluid rounded mb-5" src="assets/img/lab3/car_tof.jpg" alt="..." />
                                     <p class="mb-4 text-start">Since ToF sensors require more flexible placement than the IMU, I chose long QWIIC cables to allow for better positioning on the robot.</p>                                    
                                     <h2 class="portfolio-title text-secondary mb-3" style="font-size: 2rem;">Task 1: Picture of ToF sensor connected to QWIIC breakout board</h2>
@@ -565,13 +565,36 @@
                                     <img class="img-fluid rounded mb-5" src="assets/img/lab3/Tof_address.png" alt="..." />
                                     <p class="mb-4 text-start">It shows that the address is 0x29, which does not match the default (0x52). However, we can see that 0x29 is derived from 0x52 >> 1. The last bit of the I2C address indicates 0 for a write and 1 for a read, so only the first 7 bits are considered.</p>
                                     <h2 class="portfolio-title text-secondary mb-3" style="font-size: 2rem;">Task 3: Discussion and pictures of sensor data with chosen mode</h2>
+                                    <p class="mb-4 text-start">The ToF sensor has three modes: Short, Medium, and Long. Short mode offers the highest accuracy in ambient light and the fastest response time, while Long mode provides the longest detection range but is more affected by ambient light and has a slower response. Medium mode balances accuracy, range, and speed.<br>
+                                    Since my robot will operate indoors with ambient light and does not move very fast, a longer detection range is not necessary. I initially considered Short mode, but if it proves insufficient, I may switch to a different mode for future experiments. The picture below shows how I used the tape measure and conducted the testing.</p>
+                                    <img class="img-fluid rounded mb-5" src="assets/img/lab3/tof_testing.jpg" alt="..." />
+                                    <p class="mb-4 text-start">I tested the ToF sensor from 50 mm to 1500 mm, repeating the measurement 10 times and calculating the standard deviation, as shown in the plot and table below.</p>
+                                    <div class="img-container">
+                                        <img class="img-fluid-side rounded mb-5" src="assets/img/lab3/tof_dis.png" alt="..." width="80%"/>
+                                        <img class="img-fluid-side rounded mb-5" src="assets/img/lab3/tof_std.png" alt="..." width="80%"/>
+                                        </div>
+                                    <p class="mb-4 text-start">From the results, I conclude that the ToF sensor is generally acceptable. However, there are sometimes significant variations in the measurements. In future tests, I may need to repeat the measurements or combine it with other sensors to improve accuracy.</p>
                                     <h2 class="portfolio-title text-secondary mb-3" style="font-size: 2rem;">Task 4: 2 ToF sensors and the IMU: Discussion and screenshot/video of sensors working in parallel</h2>
+                                    <p class="mb-4 text-start">As shown in the pre-lab section, I soldered the XSHUT pin of one ToF sensor and wired it to pin 8 on the Artemis. The XSHUT pin is initially set low to put the sensor in standby mode, then the other sensor’s I2C address is changed to 0x30. Later, setting XSHUT high allows both sensors to operate on the same I2C bus with different addresses. The setup code below demonstrates this, using the shortest distance mode. And the Screenshot below shows the results.</p>
+                                    <script src="https://gist.github.com/pengrulung/79695f98607114eee2a3af6d48dcff11.js"></script>
+                                    <img class="img-fluid rounded mb-5" src="assets/img/lab3/2_TOF.png" alt="..." />
+                                    <p class="mb-4 text-start">After ensuring that both ToF sensors work simultaneously, I added the IMU to our testing. The video below shows that they can operate in parallel.</p>
+                                    <iframe class="mb-5" width="560" height="315" src="https://youtube.com/embed/e_5O_w07H7w" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                                     <h2 class="portfolio-title text-secondary mb-3" style="font-size: 2rem;">Task 5: Tof sensor speed: Discussion on speed and limiting factor; include code snippet of how you do this</h2>
+                                    <p class="mb-4 text-start">Next, I focused on recording data as quickly as possible. The first step was to remove all delays and unnecessary data collection points. I also moved the .startRanging() command into the void setup() function so that the loop wouldn't call it every time. Then, I added a time print in the loop() function. With some basic math, I can determine how much time each loop takes. The code is as follows:</p>
+                                    <script src="https://gist.github.com/pengrulung/d5502a57df2c5b380be065c42c5a8adf.js"></script>
+                                    <p class="mb-4 text-start">With the screenshot shown below, each loop takes about 8-9 ms, corresponding to a sampling rate of 120 Hz. Since some time is used for serial printing, the I2C communication between the Artemis and the sensor would be the limiting factor when collecting data.</p>  
+                                    <img class="img-fluid rounded mb-5" src="assets/img/lab3/tof_sampling.png" alt="..." />  
                                     <h2 class="portfolio-title text-secondary mb-3" style="font-size: 2rem;">Task 6: Time v Distance</h2>
+                                    <p class="mb-4 text-start">!!!!!!!!NOT DONE!!!!!!!!!</p>
                                     <h2 class="portfolio-title text-secondary mb-3" style="font-size: 2rem;">Task 7: Time v Angle</h2>
+                                    <p class="mb-4 text-start">!!!!!!!!NOT DONE!!!!!!!!!</p>
                                     <h2 class="portfolio-title text-secondary mb-3" style="font-size: 2rem;">Task 8: Screenshot of Artemis scanning for I2C device</h2>
+                                    <p class="mb-4 text-start">!!!!!!!!NOT DONE!!!!!!!!!</p>
                                     <h2 class="portfolio-title text-secondary mb-3" style="font-size: 2rem;">Additional Tasks: Discussion on infrared transmission based sensors</h2>
-                                    <h2 class="portfolio-title text-secondary mb-3" style="font-size: 2rem;">Additional Tasks: Sensitivity of sensors to colors and textures</h2>                                  
+                                    <p class="mb-4 text-start">!!!!!!!!NOT DONE!!!!!!!!!</p>
+                                    <h2 class="portfolio-title text-secondary mb-3" style="font-size: 2rem;">Additional Tasks: Sensitivity of sensors to colors and textures</h2>  
+                                    <p class="mb-4 text-start">!!!!!!!!NOT DONE!!!!!!!!!</p>                                
                                     <p class="mb-4 text-start">Lorem ipsum</p>
                                     <button class="btn btn-primary" data-bs-dismiss="modal">
                                         <i class="fas fa-xmark fa-fw"></i>
