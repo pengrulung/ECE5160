@@ -586,16 +586,29 @@
                                     <p class="mb-4 text-start">With the screenshot shown below, each loop takes about 8-9 ms, corresponding to a sampling rate of 120 Hz. Since some time is used for serial printing, the I2C communication between the Artemis and the sensor would be the limiting factor when collecting data.</p>  
                                     <img class="img-fluid rounded mb-5" src="assets/img/lab3/tof_sampling.png" alt="..." />  
                                     <h2 class="portfolio-title text-secondary mb-3" style="font-size: 2rem;">Task 6: Time v Distance</h2>
-                                    <p class="mb-4 text-start">!!!!!!!!NOT DONE!!!!!!!!!</p>
+                                    <p class="mb-4 text-start">I recorded time-stamped ToF data for about 30 seconds (with the ToF sensors in the same horizontal position, moving further away from the wall), and then sent these data over Bluetooth to my computer for plotting.</p>
+                                    <img class="img-fluid rounded mb-5" src="assets/img/lab3/time_dis.png" alt="..." />
                                     <h2 class="portfolio-title text-secondary mb-3" style="font-size: 2rem;">Task 7: Time v Angle</h2>
-                                    <p class="mb-4 text-start">!!!!!!!!NOT DONE!!!!!!!!!</p>
-                                    <h2 class="portfolio-title text-secondary mb-3" style="font-size: 2rem;">Task 8: Screenshot of Artemis scanning for I2C device</h2>
-                                    <p class="mb-4 text-start">!!!!!!!!NOT DONE!!!!!!!!!</p>
+                                    <p class="mb-4 text-start">Next, I combined all the sensors, as shown in the setup below. I tested the system with Jupyter Lab sending commands to start and stop data recording, and the board transmitting the data over Bluetooth to the computer. The plots below show IMU accelerometer data vs. time and data from two ToF sensors vs. time.</p>
+                                    <img class="img-fluid rounded mb-5" src="assets/img/lab3/all_sensors.jpg" alt="..." />
+                                    <div class="img-container">
+                                        <img class="img-fluid-side rounded mb-5" src="assets/img/lab3/time_tofs.png" alt="..." width="80%"/>
+                                        <img class="img-fluid-side rounded mb-5" src="assets/img/lab3/angle.png" alt="..." width="80%"/>
+                                        </div>
                                     <h2 class="portfolio-title text-secondary mb-3" style="font-size: 2rem;">Additional Tasks: Discussion on infrared transmission based sensors</h2>
-                                    <p class="mb-4 text-start">!!!!!!!!NOT DONE!!!!!!!!!</p>
+                                    <p class="mb-4 text-start" style="font-weight: bold;">Infrared Triangulation Sensors:</p>
+                                    <p class="mb-4 text-start">Pros: Cheap <br>Cons: Susceptible to interference, Accuracy depends on surface reflectivity</p>
+                                    <p class="mb-4 text-start" style="font-weight: bold;">Infrared Reflectance Sensors:</p>
+                                    <p class="mb-4 text-start" >Pros: Small, Cheap, Good for small-range detection<br>Cons: Short range</p>
+                                    <p class="mb-4 text-start" style="font-weight: bold;">Infrared Time-of-Flight (ToF) Sensors(we used this in our lab):</p>
+                                    <p class="mb-4 text-start">Pros: Small, Range, Fast response<br>Cons: Expensive</p>
+                                    <p class ="mb-4 text-start">Although our sensor is more expensive, it offers a greater range, a smaller size for a better fit on the car, and a faster response, making it more suitable for placement on our robot car.</p>
                                     <h2 class="portfolio-title text-secondary mb-3" style="font-size: 2rem;">Additional Tasks: Sensitivity of sensors to colors and textures</h2>  
-                                    <p class="mb-4 text-start">!!!!!!!!NOT DONE!!!!!!!!!</p>                                
-                                    <p class="mb-4 text-start">Lorem ipsum</p>
+                                    <p class="mb-4 text-start">I tested the sensor's sensitivity to colors and textures by taking distance measurements with our ToF sensor in short distance mode, targeting different objects (a white wall, a red bag, a blue bag, and a black fluffy jacket). The picture shows the objects used for testing, and the plot on the right shows the measurements. Although some variations occur above 1200 mm (with a maximum distance of 1350 mm in short distance mode), the results are acceptable and not significantly affected by color or distance.</p>                                
+                                    <div class="img-container">
+                                        <img class="img-fluid-side rounded mb-5" src="assets/img/lab3/objects.jpg" alt="..." width="40%"/>
+                                        <img class="img-fluid-side rounded mb-5" src="assets/img/lab3/ct_dis.png" alt="..." width="100%"/>
+                                        </div>
                                     <button class="btn btn-primary" data-bs-dismiss="modal">
                                         <i class="fas fa-xmark fa-fw"></i>
                                         Close Window
