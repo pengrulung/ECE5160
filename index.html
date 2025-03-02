@@ -630,7 +630,8 @@
                             <div class="row justify-content-center">
                                 <div class="col-lg-8">
                                     <!-- Portfolio Modal - Title-->
-                                    <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">Controller</h2>
+                                    <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">Lab 4</h2>
+                                    <h2 class="portfolio-title text-secondary mb-0">Motors and Open Loop Control</h2>
                                     <!-- Icon Divider-->
                                     <div class="divider-custom">
                                         <div class="divider-custom-line"></div>
@@ -638,12 +639,37 @@
                                         <div class="divider-custom-line"></div>
                                     </div>
                                     <!-- Portfolio Modal - Image-->
-                                    <img class="img-fluid rounded mb-5" src="assets/img/portfolio/game.png" alt="..." />
+                                    <img class="img-fluid rounded mb-5" src="assets/img/portfolio/Tof.png" alt="..." />
                                     <!-- Portfolio Modal - Text-->
-                                    <p class="mb-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia neque assumenda ipsam nihil, molestias magnam, recusandae quos quis inventore quisquam velit asperiores, vitae? Reprehenderit soluta, eos quod consequuntur itaque. Nam.</p>
+                                    <h2 class="portfolio-title text-secondary mb-3">Objective</h2>
+                                    <p class="mb-4 text-start">In this lab, we used the components in hand, soldered them onto our robot car, got our robot moving, and achieved open-loop control of the car.</p>
+                                    <h2 class="portfolio-title text-secondary mb-3"style="font-size: 2rem;">Prelab</h2>
+                                    <p class="mb-4 text-start">To prepare for this lab, I drew the wire diagram shown below, using A13–A16 as the control pins for motors.</p>
+                                    <img class="img-fluid rounded mb-5" src="assets/img/lab4/wire.jpg" alt="..." />
+                                    <p class="mb-4 text-start">Our motors are connected to a separate power supply from the Artemis board and other sensors because the motor supply generates more noise and requires higher current, which could potentially interfere with the Artemis board and sensors. Additionally, the motor drivers require more power than the Artemis, so we use an 850mAh battery for the motor drivers and a 650mAh battery for the Artemis.</p>                             
+                                    <h2 class="portfolio-title text-secondary mb-3" style="font-size: 2rem;">Task 1: Picture of your setup with power supply and oscilloscope hookup</h2>
+                                    <p class="mb-4 text-start">After soldering the Artemis board to the motor driver, we used an oscilloscope and a power supply to test our PWM signal. The picture below shows the setup.</p>
+                                    <img class="img-fluid rounded mb-5" src="assets/img/lab4/oscilloscope_powersupply_setup.png" alt="..." />
+                                    <h2 class="portfolio-title text-secondary mb-3" style="font-size: 2rem;">Task 2: Power supply setting discussion</h2>
+                                    <p class="mb-4 text-start">Based on the DRV8833 datasheet, the motor voltage can range from 2.7V to 10.8V. With the plan to drive the motors with a 3.7V battery, I decided to set the voltage supply to 3.7V.</p>
+                                    <h2 class="portfolio-title text-secondary mb-3" style="font-size: 2rem;">Task 3: Testing the motor drivers</h2>
+                                    <p class="mb-4 text-start">Next, I tested the motor driver by using the code below to generate a PWM signal. I set pins 13, 14, 15, and 16 as output pins for motor control. Since the duty cycle ranges from 0 (always off) to 255 (always on), I increment the signal up to 255.</p> 
+                                    <script src="https://gist.github.com/pengrulung/4fb6e4583d9ea4f95cd77ed15c57eb34.js"></script>
+                                    <h2 class="portfolio-title text-secondary mb-3" style="font-size: 2rem;">Task 4: Video of my oscilloscope</h2>
+                                    <p class="mb-4 text-start">With the code below running, I obtained the result on the oscilloscope with two channels connected to each motor driver, which is shown in the video below.</p>
+                                    <iframe class="mb-5" width="560" height="315" src="https://youtube.com/embed/ttvTqUSHOIU" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>                                   
+                                    <h2 class="portfolio-title text-secondary mb-3" style="font-size: 2rem;">Task 5: Short video of wheels spinning as expected (including code snippet it’s running on)</h2>
+                                    <p class="mb-4 text-start">After checking the PWM signal with the oscilloscope, I tested the wheels to see if they ran as expected with the code (I tested both directions and different speeds), and the video is shown below." </p>
+                                    <h2 class="portfolio-title text-secondary mb-3" style="font-size: 2rem;">Task 6: Short video of both wheels spinning (with battery driving the motor drivers)</h2>
+                                    <h2 class="portfolio-title text-secondary mb-3" style="font-size: 2rem;">Task 7: Picture of all the components secured in the car all the component labeled</h2>
+                                    <h2 class="portfolio-title text-secondary mb-3" style="font-size: 2rem;">Task 8: Lower limit PWM value discussion</h2>
+                                    <h2 class="portfolio-title text-secondary mb-3" style="font-size: 2rem;">Task 9: Calibration demonstration (discussion, video, code, pictures as needed)</h2>
+                                    <h2 class="portfolio-title text-secondary mb-3" style="font-size: 2rem;">Task 10: Open loop code and video</h2>
+                                    <h2 class="portfolio-title text-secondary mb-3" style="font-size: 2rem;">Additional tasks: analogWrite frequency discussion (include screenshots and code)</h2>
+                                    <h2 class="portfolio-title text-secondary mb-3" style="font-size: 2rem;">Additional tasks: owest PWM value speed (once in motion) discussion (include videos where appropriate)</h2>
                                     <button class="btn btn-primary" data-bs-dismiss="modal">
-                                        <i class="fas fa-xmark fa-fw"></i>
-                                        Close Window
+                                    <i class="fas fa-xmark fa-fw"></i>
+                                    Close Window
                                     </button>
                                 </div>
                             </div>
