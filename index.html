@@ -100,7 +100,7 @@
                             <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
                                 <div class="portfolio-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i></div>
                             </div>
-                            <img class="img-fluid" src="assets/img/portfolio/game.png" alt="..." />
+                            <img class="img-fluid" src="assets/img/portfolio/car2.jpg" alt="..." />
                         </div>
                         <p class="text-center mt-2 fs-4 fw-bold">Lab4</p> 
                     </div>
@@ -639,13 +639,13 @@
                                         <div class="divider-custom-line"></div>
                                     </div>
                                     <!-- Portfolio Modal - Image-->
-                                    <img class="img-fluid rounded mb-5" src="assets/img/portfolio/Tof.png" alt="..." />
+                                    <img class="img-fluid rounded mb-5" src="assets/img/portfolio/car2.jpg" alt="..." width="300px"/>
                                     <!-- Portfolio Modal - Text-->
                                     <h2 class="portfolio-title text-secondary mb-3">Objective</h2>
                                     <p class="mb-4 text-start">In this lab, we used the components in hand, soldered them onto our robot car, got our robot moving, and achieved open-loop control of the car.</p>
                                     <h2 class="portfolio-title text-secondary mb-3"style="font-size: 2rem;">Prelab</h2>
                                     <p class="mb-4 text-start">To prepare for this lab, I drew the wire diagram shown below, using A13–A16 as the control pins for motors.</p>
-                                    <img class="img-fluid rounded mb-5" src="assets/img/lab4/wire.jpg" alt="..." />
+                                    <img class="img-fluid rounded mb-5" src="assets/img/lab4/wire1.jpg" alt="..." />
                                     <p class="mb-4 text-start">Our motors are connected to a separate power supply from the Artemis board and other sensors because the motor supply generates more noise and requires higher current, which could potentially interfere with the Artemis board and sensors. Additionally, the motor drivers require more power than the Artemis, so we use an 850mAh battery for the motor drivers and a 650mAh battery for the Artemis.</p>                             
                                     <h2 class="portfolio-title text-secondary mb-3" style="font-size: 2rem;">Task 1: Picture of your setup with power supply and oscilloscope hookup</h2>
                                     <p class="mb-4 text-start">After soldering the Artemis board to the motor driver, we used an oscilloscope and a power supply to test our PWM signal. The picture below shows the setup.</p>
@@ -663,14 +663,40 @@
                                     <script src="https://gist.github.com/pengrulung/2b84df38c85870dc7aa337ab43a1fafa.js"></script>
                                     <iframe class="mb-5" width="560" height="315" src="https://youtube.com/embed/5CL5Rcs9glI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>                                   
                                     <h2 class="portfolio-title text-secondary mb-3" style="font-size: 2rem;">Task 6: Short video of both wheels spinning</h2>
-                                    <p class="mb-4" text-start">Next, I tested my robot car with batteries—one for the Artemis board and another for the motor driver—using the same code, as shown in the video below.</p>
+                                    <p class="mb-4 text-start">Next, I tested my robot car with batteries—one for the Artemis board and another for the motor driver—using the same code, as shown in the video below.</p>
                                     <iframe class="mb-5" width="560" height="315" src="https://youtube.com/embed/EAC0irulvX0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>                                   
                                     <h2 class="portfolio-title text-secondary mb-3" style="font-size: 2rem;">Task 7: Picture of all the components secured in the car all the component labeled</h2>
+                                    <p class="mb-4 text-start">After soldering all the components and powering the robot car with a battery, I secured everything to the car, as shown in the picture below.</p>
+                                    <div class="img-container">
+                                        <img class="img-fluid-side rounded mb-5" src="assets/img/lab4/car2.png" alt="..." width="80%"/>
+                                        <img class="img-fluid-side rounded mb-5" src="assets/img/lab4/car1.png" alt="..." width="80%"/>
+                                        </div>
                                     <h2 class="portfolio-title text-secondary mb-3" style="font-size: 2rem;">Task 8: Lower limit PWM value discussion</h2>
-                                    <h2 class="portfolio-title text-secondary mb-3" style="font-size: 2rem;">Task 9: Calibration demonstration (discussion, video, code, pictures as needed)</h2>
-                                    <h2 class="portfolio-title text-secondary mb-3" style="font-size: 2rem;">Task 10: Open loop code and video</h2>
-                                    <h2 class="portfolio-title text-secondary mb-3" style="font-size: 2rem;">Additional tasks: analogWrite frequency discussion (include screenshots and code)</h2>
-                                    <h2 class="portfolio-title text-secondary mb-3" style="font-size: 2rem;">Additional tasks: owest PWM value speed (once in motion) discussion (include videos where appropriate)</h2>
+                                    <p class="mb-4 text-start">Through experimentation by manually changing the PWM value, I found that the minimum PWM for the robot car to move forward was 33 (a duty ratio of 33/255 ≈ 0.129). Below this value, the car lacks the power to start moving.
+                                        <br>For turning, I found that the minimum PWM for the robot car to move was 78 (a duty ratio of 78/255 ≈ 0.306)<br>However, I noticed that sometimes the minimum value increases by about 5-10 as the same battery is used over time.
+                                    </p>
+                                    <h2 class="portfolio-title text-secondary mb-3" style="font-size: 2rem;">Task 9: Calibration demonstration</h2>
+                                    <p class="mb-4 text-start">To compensate for motor speed differences, I calibrated the robot to move straight for at least 2 meters. I marked the 2m point with small blue tape. The video and code are shown below. With manual adjustment, I found the calibration factor to be 1.125.</p>
+                                    <script src="https://gist.github.com/pengrulung/02f5245e29afe927f84d75d114accd7d.js"></script>
+                                    <iframe class="mb-5" width="560" height="315" src="https://youtube.com/embed/A6fq9gbk28A" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>                                   
+                                    <h2 class="portfolio-title text-secondary mb-3" style="font-size: 2rem;">Task 10: Open loop</h2>
+                                    <p class="mb-4 text-start">Next, I tested the robot to move forward, turn right, turn left, and move backward. The video and code are shown below.</p>
+                                    <script src="https://gist.github.com/pengrulung/2d7f59dced6bb3e49ff805611a325dbd.js"></script>
+                                    <iframe class="mb-5" width="560" height="315" src="https://youtube.com/embed/mvDRxXFiRlw" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>                                   
+                                    <h2 class="portfolio-title text-secondary mb-3" style="font-size: 2rem;">Additional tasks: analogWrite frequency discussion</h2>
+                                    <P class="mb-4 text-start">For testing analogWrite frequency, I let it generate 10 times and measured the time gap from start to end. The calculated frequency is approximately 184.3 Hz. 
+                                    <br>From the result, I think analogWrite is fast enough, as the PWM frequency for our motor driver is 50 kHz (based on the DRV8833 datasheet). Generating a faster PWM signal could also help make the robot car move more smoothly.</P>
+                                    <img class="img-fluid rounded mb-5" src="assets/img/lab4/freq.png" alt="..." />
+                                    <script src="https://gist.github.com/pengrulung/97c01b38a6be1b1f690495dfc063689c.js"></script>
+                                    <h2 class="portfolio-title text-secondary mb-3" style="font-size: 2rem;">Additional tasks: lowest PWM value speed (once in motion) discussion</h2>
+                                    <p class="mb-4 text-start">Next, I tried to find the lowest PWM value while in motion. I started from a value of 35 and decreased it by 1 every second, with the LED blinking once. Based on the calculation, I found that the lowest PWM value in motion is 26.</p>
+                                    <script src="https://gist.github.com/pengrulung/c497e7d1160f76525fab35cf0dc966f5.js"></script>
+                                    <iframe class="mb-5" width="560" height="315" src="https://youtube.com/embed/spdi0bZjkUE" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>                                   
+                                    <p class="mb-4 text-start">I also conducted a test to check how fast the robot could settle at its slowest speed. I started by running the lowest PWM value (33) that made the robot start moving for 0.5 seconds, then changed it to the lowest PWM value in motion (26). Through the experiment, I found that this was the fastest way the robot could settle at its slowest speed. The video is shown below.</p>
+                                    <iframe class="mb-5" width="560" height="315" src="https://youtube.com/embed/lTsYPb9HylA" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>                                   
+                                    <h2 class="portfolio-title text-secondary mb-3" style="font-size: 2rem;">Acknowledgements</h2>
+                                    <p class="mb-4 text-start">Cameron Urban for helping me with soldering during office hours.
+                                    <br>Wenyi Fu (2024) for using the blink method when finding the lowest PWM value.</p>
                                     <button class="btn btn-primary" data-bs-dismiss="modal">
                                     <i class="fas fa-xmark fa-fw"></i>
                                     Close Window
