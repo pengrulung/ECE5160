@@ -110,7 +110,7 @@
                             <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
                                 <div class="portfolio-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i></div>
                             </div>
-                            <img class="img-fluid" src="assets/img/portfolio/safe.png" alt="..." />
+                            <img class="img-fluid" src="assets/img/portfolio/PID_p.png" alt="..." />
                         </div>
                         <p class="text-center mt-2 fs-4 fw-bold">Lab5</p> 
                     </div>
@@ -120,7 +120,7 @@
                             <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
                                 <div class="portfolio-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i></div>
                             </div>
-                            <img class="img-fluid" src="assets/img/portfolio/submarine.png" alt="..." />
+                            <img class="img-fluid" src="assets/img/portfolio/PID_p.png" alt="..." />
                         </div>
                         <p class="text-center mt-2 fs-4 fw-bold">Lab6</p> 
                     </div>
@@ -683,7 +683,7 @@
                                     <h2 class="portfolio-title text-secondary mb-3" style="font-size: 2rem;">Task 2: Power supply setting discussion</h2>
                                     <p class="mb-4 text-start">Based on the DRV8833 datasheet, the motor voltage can range from 2.7V to 10.8V. With the plan to drive the motors with a 3.7V battery, I decided to set the voltage supply to 3.7V.</p>
                                     <h2 class="portfolio-title text-secondary mb-3" style="font-size: 2rem;">Task 3: Testing the motor drivers</h2>
-                                    <p class="mb-4 text-start">Next, I tested the motor driver by using the code below to generate a PWM signal. I set pins 13, 14, 15, and 16 as output pins for motor control. Since the duty cycle ranges from 0 (always off) to 255 (always on), I increment the signal up to 255.</p> 
+                                    <p class="mb-4 text-start">Next, I tested the motor driver by using the code below to generate a PWM signal. I set pins 13, 14, 15, and 16 as output pins for motor control. Since the PWM signal ranges from 0 (always off) to 255 (always on), I increment the signal up to 255.</p> 
                                     <script src="https://gist.github.com/pengrulung/4fb6e4583d9ea4f95cd77ed15c57eb34.js"></script>
                                     <h2 class="portfolio-title text-secondary mb-3" style="font-size: 2rem;">Task 4: Video of my oscilloscope</h2>
                                     <p class="mb-4 text-start">With the code below running, I obtained the result on the oscilloscope with two channels connected to each motor driver, which is shown in the video below.</p>
@@ -757,17 +757,25 @@
                                         <div class="divider-custom-line"></div>
                                     </div>
                                     <!-- Portfolio Modal - Image-->
-                                    <img class="img-fluid rounded mb-5" src="assets/img/portfolio/car2.jpg" alt="..." width="300px"/>
+                                    <img class="img-fluid rounded mb-5" src="assets/img/portfolio/PID_p.png" alt="..." width="300px"/>
                                     <!-- Portfolio Modal - Text-->
                                     <h2 class="portfolio-title text-secondary mb-3">Objective</h2>
-                                    <p class="mb-4 text-start">Lorem ipsum dolor sit amet, con</p>
+                                    <p class="mb-4 text-start">The purpose of this lab is to get familiar with PID control. my plan is to have a full pid control to implement position control.</p>
                                     <h2 class="portfolio-title text-secondary mb-3"style="font-size: 2rem;">Prelab</h2>
-                                    <p class="mb-4 text-start">To prepare for this lab, </p>
+                                    <p class="mb-4 text-start">To prepare for this lab, I set up Bluetooth commands to send and receive data. I already have a command, GET_DATA, to retrieve the recorded data, which I completed earlier. I also included the SET_PID command to adjust PID values without re-uploading the board and the START_MOVE command to initiate the car's forward motion with PID control while optionally recording data. Additionally, I added the STOP_MOVE command to stop the car. The code is shown below:</p>
+                                    <script src="https://gist.github.com/pengrulung/bb95696d247cfb69b10f344fd4aeaec1.js"></script>
                                     <img class="img-fluid rounded mb-5" src="assets/img/lab4/wire1.jpg" alt="..." />
                                     <p class="mb-4 text-start">Our motors</p>                             
                                     <h2 class="portfolio-title text-secondary mb-3" style="font-size: 2rem;">Task 1: P/I/D discussion</h2>
-                                    <p class="mb-4 text-start">After </p>
-                                    <img class="img-fluid rounded mb-5" src="assets/img/lab4/setup.png" alt="..." />
+                                    <img class="img-fluid rounded mb-5" src="assets/img/lab5/PID.png" alt="..." />
+                                    <p class="mb-4 text-start">A PID controller can be implemented using the equation above, which consists of three components: proportional control K<sub>p</sub>, integral control K<sub>i</sub>, and derivative control K<sub>d</sub>.<br>
+                                    The proportional term K<sub>p</sub> directly responds to the current error, which is the difference between the current position and the target position. Increasing K<sub>p</sub> enhances the correction speed, helping the system reach the desired position more quickly. However, an excessively high K<sub>p</sub> may lead to overshooting.<br>  
+                                    The integral term K<sub>i</sub> compensates for accumulated error over time. Even if the error is small, it can build up gradually. While K<sub>i</sub> helps eliminate steady-state error, setting it too high may result in excessive overshooting.  <br>
+                                    The derivative term K<sub>d</sub> acts as a damping factor by considering the rate of change of error. It helps slow down corrections when the PI terms produce aggressive responses. However, one drawback of K<sub>d</sub> is that it can amplify noise, potentially leading to unstable behavior.</p>
+                                    <p class="mb-4 text-start">I started building my PID controller with a P controller. Since the task is to run a distance of 2-4 meters, my plan is to run at 100% speed when the error is about 2000mm and at 10% speed when the error is about 200mm. Thus, I began testing with Kp = 0.05. To be more conservative at the beginning, I limit the maximum speed to 45% if the speed exceeds 45%.<br>
+                                    Below is the code and the video.</p>
+                                    <script src="https://gist.github.com/pengrulung/4d7f73f2b751ac61dda59f1b85040da2.js"></script>
+                                    <iframe class="mb-5" width="560" height="315" src="https://youtube.com/shorts/eG07RxKlP2M" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>                                   
                                     <h2 class="portfolio-title text-secondary mb-3" style="font-size: 2rem;">Task 2: Range/Sampling time discussion</h2>
                                     <p class="mb-4 text-start">Based on </p>
                                     <h2 class="portfolio-title text-secondary mb-3" style="font-size: 2rem;">Task 3: Graphs, code, videos, images, discussion of reaching task goal</h2>
