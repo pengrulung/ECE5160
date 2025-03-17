@@ -791,6 +791,7 @@
                                     <h2 class="portfolio-title text-secondary mb-3" style="font-size: 2rem;">PI Controller</h2>
                                     <p class="mb-4 text-start">Next, I started to implement the PI controller by adding some code, which is shown below.
                                     <br>I only added a few lines to implement the PI controller, introducing a new term—the integrated error—into my overall PWM calculation. I manually adjusted the Ki value, starting with Ki = 0.01. However, when the car needed to slow down and stop, the integral term prevented it from decreasing speed properly. So, I reduced Ki and found that Ki = 0.00001 allowed the car to stop in front of the wall. 
+                                    <br>Also, I limit the value from 15 to -15 here based on multiple tests. 
                                     </p> 
                                     <script src="https://gist.github.com/pengrulung/76d08652bbcb77573788a937729fd559.js"></script>
                                     <p class="mb-4 text-start">I also made some small adjustments. After observing my PI terms and distance-speed changes, I found that the I term was still decreasing slowly when the robot car was about to bump into the wall. Thus, I adjusted the I term to 0 when the robot car passed the target point, with the code shown below.</p>
@@ -803,14 +804,38 @@
                                     <h2 class="portfolio-title text-secondary mb-3" style="font-size: 2rem;">PID Controller</h2>
                                     <p class="mb-4 text-start">Finally, I added the derivative term to the PID controller. First, I calculated the difference between the current error and the last error, then divided by dt. The update didn’t happen the first time. I added a low-pass filter (LPF) because the ToF data is noisy, which made the derivative unstable. Adding the LPF helps stabilize the derivative term and make it more reasonable. Through experimentation, I found that an alpha value of 0.15 works well. The code is shown bleow.</p>
                                     <script src="https://gist.github.com/pengrulung/4bbbd6f8210d3a1a06f709a8d3b2ab71.js"></script>
+                                    <p class="mb-4 text-start">With multiple testings, I set my Kd to 0.008.</p>
                                     <p class="mb-4 text-start">Below is the plot of distance vs time, PID term vs time, PWM vs time, as well as the demo video.</p>
                                     <img class="img-fluid rounded mb-3" src="assets/img/lab5/pid_dis.png" alt="..." />
                                     <img class="img-fluid rounded mb-3" src="assets/img/lab5/pid_pid.png" alt="..." />
+                                    <p class="mb-1 text-start">Note: The D term is close to 0 but not exactly 0.</p>
                                     <img class="img-fluid rounded mb-3" src="assets/img/lab5/pid_pwm.png" alt="..." />
                                     <iframe class="mb-5" width="560" height="315" src="https://youtube.com/embed/1oTdvb3fX3Y" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>                                   
                                     <h2 class="portfolio-title text-secondary mb-3" style="font-size: 2rem;">Wind-up implementation and discussion</h2>
-                                    <p class="mb-4 text-start">Based on </p>
-                                    <h2 class="portfolio-title text-secondary mb-3" style="font-size: 2rem;">Discussion</h2>
+                                    <p class="mb-4 text-start">Integrator wind-up occurs when the I term of a PID controller accumulates excessive error because the actuator hits its saturation limit and cannot provide more control. This can lead to overshooting or slow recovery once the system starts responding again. Therefore, preventing wind-up is essential to maintaining stable control.
+                                    <br> I believe I have already implemented a solution where the integral term resets to zero when the robot passes the target point. However, I made a small modification to my code: now, the integral term resets when the robot passes the correction point, regardless of direction. The updated code is shown below.</p>
+                                    <script src="https://gist.github.com/pengrulung/54aedf1eba3cefb00f1cf89db16c8f2a.js"></script>
+                                    <p class="mb-4 text-start">I also tested the system with and without wind-up protection on both a wooden floor and a carpet. The demo video shows the robot running on both surfaces, with and without wind-up protection, and the results of the integral (I) term are shown below. Note: I still clamp the I term between -15 and 15.</p>
+                                    <iframe class="mb-5" width="560" height="315" src="https://youtube.com/embed/s93hHCTA8Zs" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>                                   
+                                    <img class="img-fluid rounded mb-3" src="assets/img/lab5/w_wo_windup.png" alt="..." />
+                                    <p class="mb-4 text-start">With wind-up prevention, the I term won't keep increasing when the robot should be decreasing. In the video above, it seems that with or without wind-up, the results are not significantly different, as both cases stop before hitting the wall. The reason they stop before the wall is that the I term remains small, the velocity is low, and the robot requires a higher PWM value to move on the carpet. However, upon closer observation, the robot with wind-up prevention stops closer to the set point, whereas the robot without wind-up tends to overshoot the target (though luckily, it still stops before the wall).</p>
+                                    <h2 class="portfolio-title text-secondary mb-3" style="font-size: 2rem;">Final System and Discussion</h2>
+                                    <p class="mb-4 text-start">There are still some problems with my system. Instead of adjusting its position to a target point, my robot tends to stop before the wall without fine-tuning its distance from the wall.
+                                    <br>To address this, I made some adjustments through experimental testing. I changed my target point to 300 mm.
+                                    <br>Additionally, due to limitations with the motor actuators, the robot won't move if the PWM signal is less than 33 (a value determined from a previous lab). To compensate for this, I added 30 to the PWM signal when the robot needs to move backward but the signal is below the threshold, allowing for small adjustments.
+                                    <br>In the end, I found that the appropriate PID parameters are Pi = 0.015, Pd = 0.00001, Pk = 0.008.
+                                    <br>The plots below show that the robot successfully stops before the wall, with a final position of 300 mm from the wall.</p>   
+                                    <img class="img-fluid rounded mb-3" src="assets/img/lab5/final_system_dis.png" alt="..." />
+                                    <img class="img-fluid rounded mb-3" src="assets/img/lab5/final_system_pid.png" alt="..." />
+                                    <p class="mb-1 text-start">Note: The D term is close to 0 but not exactly 0.</p>
+                                    <img class="img-fluid rounded mb-3" src="assets/img/lab5/fianl system_pwm.png" alt="..." />
+                                    <p class="mb-4 text-start"> I got the maximun speed in my final system by calculating the Tof sensor data and time is 1.3m/s.
+                                    <img class="img-fluid rounded mb-1" src="assets/img/lab5/max_speed.png" alt="..." /> 
+                                    <p class="mb-4 text-start">Here is the demo video, with three repeated run.</p>
+                                    <iframe class="mb-5" width="560" height="315" src="https://youtube.com/embed/AYge03Bk5xA" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> 
+                                    <br>Although there are more things I could implement, such as faster speeds, more difficult setpoints, and calibration between both wheels (which I have already implemented, but it seems to need more accurate control), I believe I have achieved the lab's goal.</p>
+                                    <h2 class="portfolio-title text-secondary mb-3" style="font-size: 2rem;">Acknowledgment</h2>
+                                    <p class="mb-4 text-start">Thanks to Ben Liao and Shuchang Wen for their tips on this lab (how to receive Bluetooth data and how to tune the PID), and also to the TAs for their support (ToF sensor setup and tips for the I controller).</p>
                                     <button class="btn btn-primary" data-bs-dismiss="modal">
                                         <i class="fas fa-xmark fa-fw"></i>
                                         Close Window
