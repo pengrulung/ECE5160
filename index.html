@@ -760,7 +760,7 @@
                                     <img class="img-fluid rounded mb-5" src="assets/img/portfolio/PID_p.png" alt="..." width="300px"/>
                                     <!-- Portfolio Modal - Text-->
                                     <h2 class="portfolio-title text-secondary mb-3">Objective</h2>
-                                    <p class="mb-4 text-start">The purpose of this lab is to get familiar with PID control. My plan is to have a full pid control to implement position control.</p>
+                                    <p class="mb-4 text-start">The purpose of this lab is to become familiar with PID control and to use a ToF sensor for implementing position control. My plan is to implement full PID control for position control.</p>
                                     <h2 class="portfolio-title text-secondary mb-3"style="font-size: 2rem;">Prelab</h2>
                                     <p class="mb-4 text-start">To prepare for this lab, I set up Bluetooth commands to send and receive data. I already have a command, GET_DATA, to retrieve the recorded data, which I completed earlier. I also included the SET_PID command to adjust PID values without re-uploading the board and the START_MOVE command to initiate the car's forward motion with PID control while optionally recording data. Additionally, I added the STOP_MOVE command to stop the pid control and the car. The code is shown below:</p>
                                     <script src="https://gist.github.com/pengrulung/bb95696d247cfb69b10f344fd4aeaec1.js"></script> 
@@ -857,7 +857,8 @@
                             <div class="row justify-content-center">
                                 <div class="col-lg-8">
                                     <!-- Portfolio Modal - Title-->
-                                    <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">Submarine</h2>
+                                    <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">Lab 6</h2>
+                                    <h2 class="portfolio-title text-secondary mb-0">Orientation Control</h2>
                                     <!-- Icon Divider-->
                                     <div class="divider-custom">
                                         <div class="divider-custom-line"></div>
@@ -865,8 +866,30 @@
                                         <div class="divider-custom-line"></div>
                                     </div>
                                     <!-- Portfolio Modal - Image-->
-                                    <img class="img-fluid rounded mb-5" src="assets/img/portfolio/submarine.png" alt="..." />
+                                    <img class="img-fluid rounded mb-5" src="assets/img/portfolio/PID_p.png" alt="..." width="300px"/>
                                     <!-- Portfolio Modal - Text-->
+                                    <h2 class="portfolio-title text-secondary mb-3">Objective</h2>
+                                    <p class="mb-4 text-start">The purpose of this lab is to use an IMU for implementing orientation control. My plan is to implement full PID control.</p>
+                                    <h2 class="portfolio-title text-secondary mb-3"style="font-size: 2rem;">Prelab</h2>
+                                    <p class="mb-4 text-start">Similar to what I did in Lab 5, I added the command for setting PID parameters for orientation. Based on the original command for start and end control, I added an additional parameter for starting/ending orientation control. I also added the command for sending the orientation information. The code is shown below.</p>
+                                    ********code here*******
+                                    <p class="mb-4 text-start">Also, I added a notification handler to help me receive the data sent from the robot car. This allows me to gather the data, plot it, and also use it for debugging and adjusting my strategy.</p>                         
+                                    ********code here*******
+                                    <p class="mb-4 text-start">Next, I experimented with the DMP, which can correct errors and drift by integrating data from the ICM’s 3-axis gyroscope, accelerometer, and magnetometer. I began with Example7_DMP_Quat6_EulerAngles.</p>
+                                    <iframe class="mb-5" width="560" height="315" src="https://youtube.com/embed/ka9PVeqXlrE" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>                                   
+                                    <h2 class="portfolio-title text-secondary mb-3" style="font-size: 2rem;">P/I/D discussion</h2>
+                                    <img class="img-fluid rounded mb-5" src="assets/img/lab5/PID.png" alt="..." />
+                                    <p class="mb-4 text-start">A PID controller can be implemented using the equation above, which consists of three components: proportional control K<sub>p</sub>, integral control K<sub>i</sub>, and derivative control K<sub>d</sub>.<br>
+                                    The proportional term K<sub>p</sub> directly responds to the current error, which is the difference between the current position and the target position. Increasing K<sub>p</sub> enhances the correction speed, helping the system reach the desired position more quickly. However, an excessively high K<sub>p</sub> may lead to overshooting.<br>  
+                                    The integral term K<sub>i</sub> compensates for accumulated error over time. Even if the error is small, it can build up gradually. While K<sub>i</sub> helps eliminate steady-state error, setting it too high may result in excessive overshooting.  <br>
+                                    The derivative term K<sub>d</sub> acts as a damping factor by considering the rate of change of error. It helps slow down corrections when the PI terms produce aggressive responses. However, one drawback of K<sub>d</sub> is that it can amplify noise, potentially leading to unstable behavior.</p>
+                                    <h2 class="portfolio-title text-secondary mb-3" style="font-size: 2rem;">P Controller</h2>
+                                    <p class="mb-4 text-start">I started building my PID controller with a P controller. Since the task is to run a distance of 2-4 meters, my plan is to run at 100% speed when the error is about 4000mm and at 10% speed when the error is about 400mm. Thus, I began testing with Kp = 0.025. To be more conservative at the beginning, I limited the maximum speed to 45% (with a PWM value of about 100) if the speed exceeded 45%. However, with this setting, my robot still ran into the wall. I tried decreasing Kp slightly, and it turned out to work. As a result, I decided on Kp = 0.02. For other parameter settings, I set pid_pos_target to 500mm since I don't want my car to bump into the wall. The sc_pwm value is 2.55, which helps convert my p term to a PWM signal.<br>
+                                    Below is the code and the video.</p>
+                                    <script src="https://gist.github.com/pengrulung/4d7f73f2b751ac61dda59f1b85040da2.js"></script>
+                                    <iframe class="mb-5" width="560" height="315" src="https://youtube.com/embed/eG07RxKlP2M" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>                                   
+                                    <p class="mb-4 text-start">I also plotted graphs showing ToF sensor data vs. time, P term vs. time, and PWM data vs. time. The ToF sensor shows the distance(mm) to the wall, and the P term represents the current error (the distance to the wall minus 500mm) multiplied by Pi (which I set to 0.02). The PWM data represents the value I assigned to the motor. These help me better understand how my car works and how I can adjust my plan.</p>   
+                                    
                                     <p class="mb-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia neque assumenda ipsam nihil, molestias magnam, recusandae quos quis inventore quisquam velit asperiores, vitae? Reprehenderit soluta, eos quod consequuntur itaque. Nam.</p>
                                     <button class="btn btn-primary" data-bs-dismiss="modal">
                                         <i class="fas fa-xmark fa-fw"></i>
