@@ -871,12 +871,16 @@
                                     <h2 class="portfolio-title text-secondary mb-3">Objective</h2>
                                     <p class="mb-4 text-start">The purpose of this lab is to use an IMU for implementing orientation control. My plan is to implement full PID control.</p>
                                     <h2 class="portfolio-title text-secondary mb-3"style="font-size: 2rem;">Prelab</h2>
-                                    <p class="mb-4 text-start">Similar to what I did in Lab 5, I added the command for setting PID parameters for orientation. Based on the original command for start and end control, I added an additional parameter for starting/ending orientation control. I also added the command for sending the orientation information. The code is shown below.</p>
-                                    ********code here*******
+                                    <p class="mb-4 text-start">Similar to what I did in Lab 5, I added the command for setting PID parameters for orientation. Based on the original command for start and end control, I added an additional parameter for starting/ending/recording orientation control. I also added the command for sending the orientation information. The code is shown below.</p>
+                                    <script src="https://gist.github.com/pengrulung/7c9a5939aef4a8a94dd4dcf21760f214.js"></script>
                                     <p class="mb-4 text-start">Also, I added a notification handler to help me receive the data sent from the robot car. This allows me to gather the data, plot it, and also use it for debugging and adjusting my strategy.</p>                         
-                                    ********code here*******
+                                    <script src="https://gist.github.com/pengrulung/d5e8229671766050b188e7234ee33890.js"></script>
                                     <p class="mb-4 text-start">Next, I experimented with the DMP, which can correct errors and drift by integrating data from the ICM’s 3-axis gyroscope, accelerometer, and magnetometer. I began with Example7_DMP_Quat6_EulerAngles.</p>
                                     <iframe class="mb-5" width="560" height="315" src="https://youtube.com/embed/ka9PVeqXlrE" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>                                   
+                                    <p class="mb-4 text-start">I incorporated the DMP initialization to the setup() function on my Artemis.</p>
+                                    <script src="https://gist.github.com/pengrulung/39d45eac3a5b865ba98b05fcd7158a27.js"></script>
+                                    <p class="mb-4 text-start">I am getting orientation measurements from the DMP as quaternions and converting them to an Euler angle to determine the yaw in the get_yaw() function, which will be called in the BLE loop.</p>
+                                    <script src="https://gist.github.com/pengrulung/afbf33813b75458b8cf83ce1f6d20255.js"></script>
                                     <h2 class="portfolio-title text-secondary mb-3" style="font-size: 2rem;">P/I/D discussion</h2>
                                     <img class="img-fluid rounded mb-5" src="assets/img/lab5/PID.png" alt="..." />
                                     <p class="mb-4 text-start">A PID controller can be implemented using the equation above, which consists of three components: proportional control K<sub>p</sub>, integral control K<sub>i</sub>, and derivative control K<sub>d</sub>.<br>
