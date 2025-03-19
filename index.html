@@ -881,11 +881,11 @@
                                     <script src="https://gist.github.com/pengrulung/39d45eac3a5b865ba98b05fcd7158a27.js"></script>
                                     <p class="mb-4 text-start">I am getting orientation measurements from the DMP as quaternions and converting them to an Euler angle to determine the yaw in the get_yaw() function, which will be called in the BLE loop.</p>
                                     <script src="https://gist.github.com/pengrulung/afbf33813b75458b8cf83ce1f6d20255.js"></script>
-                                    <h2 class="portfolio-title text-secondary mb-3" style="font-size: 2rem;">Answering Discussion Question</h2>
+                                    <h2 class="portfolio-title text-secondary mb-3" style="font-size: 2rem;">Answering Discussion Questions</h2>
                                     <p class="mb-4 text-start">PID Input Signal<br>
                                     Integrating gyroscope data over time can lead to drift, causing errors to increase. To solve this, advanced sensor fusion techniques, like using acceleration and magnetometer data, might help stabilize the integration. The gyroscope has a constant bias, which affects the integrated data. To prevent drift from influencing the system, I’m considering using the Digital Motion Processor (DMP). Additionally, the gyroscope’s default maximum spin rate is set to 250 degrees/sec (dps) and it might be a littl bit slow since my robot run faster.</p>
                                     <p class="mb-4 text-start">Derivative Term<br>
-                                    To take the derivative of an integral, the yaw we used for the lab, the integrated yaw angle, will be its own signal. Taking the derivative of it makes sense. When we change the setpoint, it will cause a derivative kick and a large change in the output value. I will need a low-pass filter for the D term to smooth the response.</p>
+                                    To take the derivative of an integral, the yaw we used for the lab, will be its own signal. Thus, it makes sense to take the derivative. When we change the setpoint, it will cause a derivative kick and a large change in the output value. I will need a low-pass filter for the D term to smooth the response.</p>
                                     <p class="mb-4 text-start">Programming Implementation<br>
                                     For my system, my controller can keep running and continuously receive Bluetooth commands since it operates within the main loop, and receiving Bluetooth commands is also part of the same loop. I think I will need to update the setpoint in real time. I am considering setting the new setpoint automatically, and I believe driving forward and backward, as well as controlling orientation at the same time, is totally workable. I have a controller for position and also one for orientation. I am thinking of letting them work together. I plan to work on this later(not in this lab).
                                     <h2 class="portfolio-title text-secondary mb-3" style="font-size: 2rem;">P/I/D discussion</h2>
@@ -893,7 +893,9 @@
                                     <p class="mb-4 text-start">A PID controller can be implemented using the equation above, which consists of three components: proportional control K<sub>p</sub>, integral control K<sub>i</sub>, and derivative control K<sub>d</sub>.<br>
                                     The proportional term K<sub>p</sub> directly responds to the current error, which is the difference between the current position and the target position. Increasing K<sub>p</sub> enhances the correction speed, helping the system reach the desired position more quickly. However, an excessively high K<sub>p</sub> may lead to overshooting.<br>  
                                     The integral term K<sub>i</sub> compensates for accumulated error over time. Even if the error is small, it can build up gradually. While K<sub>i</sub> helps eliminate steady-state error, setting it too high may result in excessive overshooting.  <br>
-                                    The derivative term K<sub>d</sub> acts as a damping factor by considering the rate of change of error. It helps slow down corrections when the PI terms produce aggressive responses. However, one drawback of K<sub>d</sub> is that it can amplify noise, potentially leading to unstable behavior.</p>
+                                    The derivative term K<sub>d</sub> acts as a damping factor by considering the rate of change of error. It helps slow down corrections when the PI terms produce aggressive responses. However, one drawback of K<sub>d</sub> is that it can amplify noise, potentially leading to unstable behavior.
+                                    <br>To get more familiar with the PID controller and also challenge myself, I decided to implement a PID controller.
+                                    </p>
                                     <h2 class="portfolio-title text-secondary mb-3" style="font-size: 2rem;">P Controller</h2>
                                     <p class="mb-4 text-start">I started building my PID controller with a P controller. The task is orientation control, where I can assign an angle, and the robot car will rotate back to the assigned angle no matter how I push or rotate it. I assign a target angle in the command SET_ORI_PID.</p>
                                     <script src="https://gist.github.com/pengrulung/9877a8071807d85072c991cb59b95217.js"></script>
@@ -919,6 +921,7 @@
                                     <img class="img-fluid rounded mb-3" src="assets/img/lab6/pid_yaw.png" alt="..." />
                                     <img class="img-fluid rounded mb-1" src="assets/img/lab6/pid_pid.png" alt="..." />
                                     <img class="img-fluid rounded mb-3" src="assets/img/lab6/pid_motoe.png" alt="..." />
+                                    <p class="mb-1 text-start">Note here, the D term is close to 0 but not exactly zero.</p>
                                     <iframe class="mb-5" width="560" height="315" src="https://youtube.com/embed/juQgJj-wjRQ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>                                   
                                     <h2 class="portfolio-title text-secondary mb-3" style="font-size: 2rem;">Range/Sampling time discussion</h2>
                                     <p class="mb-4 text-start">I also tested the DMP sampling rate and the main loop rate. The results are shown below. Compared to the ToF sampling rate from Lab 5, the DMP prepares the data faster than the ToF sensor.</p>
@@ -929,6 +932,7 @@
                                     <img class="img-fluid rounded mb-3" src="assets/img/lab6/windup_yaw.png" alt="..." />
                                     <img class="img-fluid rounded mb-1" src="assets/img/lab6/wind_uppid.png" alt="..." />
                                     <img class="img-fluid rounded mb-3" src="assets/img/lab6/windup_pwm.png" alt="..." />
+                                    <p class="mb-1 text-start">Note here, the D term is close to 0 but not exactly zero.</p>
                                     <p class="mb-4" text-start>In my system, the P term plays a larger role in determining the PWM input, so the influence of windup is not very noticeable. However, from the plot, we can observe that when the car needs to change direction, the I term resets to 0 instead of gradually decreasing as I had originally planned.</p>
                                     <iframe class="mb-5" width="560" height="315" src="https://youtube.com/embed/MQ1C84UneKA" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>                                   
                                     <h2 class="portfolio-title text-secondary mb-3" style="font-size: 2rem;">Different surface</h2>
@@ -936,6 +940,7 @@
                                     <img class="img-fluid rounded mb-3" src="assets/img/lab6/carpet_yaw.png" alt="..." />
                                     <img class="img-fluid rounded mb-1" src="assets/img/lab6/carpet_pid.png" alt="..." />
                                     <img class="img-fluid rounded mb-3" src="assets/img/lab6/carpet_pwm.png" alt="..." />
+                                    <p class="mb-1 text-start">Note here, the D term is close to 0 but not exactly zero.</p>
                                     <iframe class="mb-5" width="560" height="315" src="https://youtube.com/embed/ghW2zlgKjSo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>                                   
                                     <button class="btn btn-primary" data-bs-dismiss="modal">
                                         <i class="fas fa-xmark fa-fw"></i>
