@@ -906,8 +906,9 @@
                                     <img class="img-fluid rounded mb-3" src="assets/img/lab6/pid_pi_pwm.png" alt="..." />
                                     <iframe class="mb-5" width="560" height="315" src="https://youtube.com/embed/GcWCQh64XRA" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>                                   
                                     <h2 class="portfolio-title text-secondary mb-3" style="font-size: 2rem;">PID Controller</h2>
-                                    <p class="mb-4 text-start">Kd=1.1</p>
-                                    ***code explain, code
+                                    <p class="mb-4 text-start">Finally, I added the derivative term to the PID controller, computing the error difference divided by dt. The update won’t occur the first time. To stabilize the derivative, I applied a low-pass filter (LPF), finding an alpha value of 0.15 to work well. The code is shown below. With some testing, I found that Kd = 1.1 performs well. </p>
+                                    <script src="https://gist.github.com/pengrulung/07385240b61fc1682c030a4179e59459.js"></script>
+                                    <p class="mb-4 text-start">The graphs below show yaw data vs. time, P/I/D term vs. time, and PWM data vs. time, helping me better understand how my car operates and how to adjust my plan. The demo video is shown below.</p>   
                                     <img class="img-fluid rounded mb-3" src="assets/img/lab6/pid_yaw.png" alt="..." />
                                     <img class="img-fluid rounded mb-1" src="assets/img/lab6/pid_pid.png" alt="..." />
                                     <img class="img-fluid rounded mb-3" src="assets/img/lab6/pid_motoe.png" alt="..." />
@@ -916,15 +917,18 @@
                                     <p class="mb-4 text-start">I also tested the DMP sampling rate and the main loop rate. The results are shown below. Compared to the ToF sampling rate from Lab 5, the DMP prepares the data faster than the ToF sensor.</p>
                                     <img class="img-fluid rounded mb-3" src="assets/img/lab6/rate.png" alt="..." />
                                     <h2 class="portfolio-title text-secondary mb-3" style="font-size: 2rem;">wind-up protection</h2>
-                                    <p class="mb-4 text-start"></p>
+                                    <p class="mb-4 text-start">Integrator wind-up occurs when the I term accumulates excessive error due to actuator limits, causing overshooting or slow recovery. To prevent this, I added the code below to reset it when the direction should change. </p>
+                                    <script src="https://gist.github.com/pengrulung/7065f0193a775a3c2755a7bdfa118406.js"></script>
                                     <img class="img-fluid rounded mb-3" src="assets/img/lab6/windup_yaw.png" alt="..." />
                                     <img class="img-fluid rounded mb-1" src="assets/img/lab6/wind_uppid.png" alt="..." />
                                     <img class="img-fluid rounded mb-3" src="assets/img/lab6/windup_pwm.png" alt="..." />
+                                    <p class="mb-4" text-start>In my system, the P term plays a larger role in determining the PWM input, so the influence of windup is not very noticeable. However, from the plot, we can observe that when the car needs to change direction, the I term resets to 0 instead of gradually decreasing as I had originally planned.</p>
                                     <iframe class="mb-5" width="560" height="315" src="https://youtube.com/embed/MQ1C84UneKA" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>                                   
                                     <h2 class="portfolio-title text-secondary mb-3" style="font-size: 2rem;">Different surface</h2>
-                                    <img class="img-fluid rounded mb-3" src="assets/img/lab6/windup_yaw.png" alt="..." />
-                                    <img class="img-fluid rounded mb-1" src="assets/img/lab6/wind_uppid.png" alt="..." />
-                                    <img class="img-fluid rounded mb-3" src="assets/img/lab6/windup_pwm.png" alt="..." />
+                                    <p class="mb-4" text-start>I also tested my system on a carpet. Since the minimum force required for the car to rotate is relatively large on the carpet, it moves very slowly, but it is still returning to the assigned angle. It can run faster; however, my system is limited to a max PWM value of 200. I may need to increase the max PWM value and also adjust the weight of Ki so that the integral term can keep accumulating, which would lead to more response. However, I didn't plan to implement this, as I don't expect to run my car on the carpet most of the time. That said, the results show that my car can work on different surfaces.</p>
+                                    <img class="img-fluid rounded mb-3" src="assets/img/lab6/carpet_yaw.png" alt="..." />
+                                    <img class="img-fluid rounded mb-1" src="assets/img/lab6/carpet_pid.png" alt="..." />
+                                    <img class="img-fluid rounded mb-3" src="assets/img/lab6/carpet_pwm.png" alt="..." />
                                     <iframe class="mb-5" width="560" height="315" src="https://youtube.com/embed/ghW2zlgKjSo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>                                   
                                     <button class="btn btn-primary" data-bs-dismiss="modal">
                                         <i class="fas fa-xmark fa-fw"></i>
