@@ -890,18 +890,17 @@
                                     <h2 class="portfolio-title text-secondary mb-3" style="font-size: 2rem;">P Controller</h2>
                                     <p class="mb-4 text-start">I started building my PID controller with a P controller. The task is orientation control, where I can assign an angle, and the robot car will rotate back to the assigned angle no matter how I push or rotate it. I assign a target angle in the command SET_ORI_PID.</p>
                                     <script src="https://gist.github.com/pengrulung/9877a8071807d85072c991cb59b95217.js"></script>
-                                    <p class ="mb-4 text-start">I began testing with Kp = 2 and gradually increased the value. The sc_ori_pwm value is 2.55, which helps convert the P term into a PWM signal. I set the highest PWM value to 200 since I don't want my robot to spin too fast. After multiple tests, I finally chose Kp = 3.5. Below is the code.</p>
-                                    <p class ="mb-4 text-start">code explain here</p>
+                                    <p class ="mb-4 text-start">I first get the new yaw and calculate the error between the target and the current yaw, then multiply by Kp. I also check if the error exceeds 180 degrees, and if it does, it can rotate in a small circle (referencing Stephan Wagner, 2024). The sc_ori_pwm value is 2.55, which helps convert the P term into a PWM signal. I set the highest PWM value to 200 since I don't want my robot to spin too fast. I began testing with Kp = 2 and gradually increased the value. After multiple tests, I finally chose Kp = 3.5. Below is the code.</p>
                                     <script src="https://gist.github.com/pengrulung/a6b5d5c70d35c40d0f2b7807612c7100.js"></script>
+                                    <p class="mb-4 text-start">I also plotted graphs showing yaw data vs. time, P term vs. time, and PWM data vs. time. These plots help me better understand how my car operates and how I can adjust my plan. And the demo video shown below.</p>   
                                     <img class="img-fluid rounded mb-3" src="assets/img/lab6/p_yaw.png" alt="..." />
                                     <img class="img-fluid rounded mb-1" src="assets/img/lab6/pid_p.png" alt="..." />
                                     <img class="img-fluid rounded mb-3" src="assets/img/lab6/pid_p_pwm.png" alt="..." />
                                     <iframe class="mb-5" width="560" height="315" src="https://youtube.com/embed/1Vru7o2h6hI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>                                   
                                     <h2 class="portfolio-title text-secondary mb-3" style="font-size: 2rem;">PI Controller</h2>
-                                    <p class="mb-4 text-start">I also plotted graphs showing ToF sensor data vs. time, P term vs. time, and PWM data vs. time. The ToF sensor shows the distance(mm) to the wall, and the P term represents the current error (the distance to the wall minus 500mm) multiplied by Pi (which I set to 0.02). The PWM data represents the value I assigned to the motor. These help me better understand how my car works and how I can adjust my plan.</p>   
-                                    <p class="mb-4 text-start">Ki=1</p>
-                                    <p class ="mb-4 text-start">code explain here</p>
+                                    <p class="mb-4 text-start">I only added a few lines to implement the I terms, which integrate the error, add it to the I term, and use it to calculate the speed. From multiple testing, I set Ki t0 1.</p>
                                     <script src="https://gist.github.com/pengrulung/689454d1cf90a5740a3bdf6e2fbe02bc.js"></script>
+                                    <p class="mb-4 text-start">I plotted graphs showing yaw data vs. time, P/I term vs. time, and PWM data vs. time. These plots help me better understand how my car operates and how I can adjust my plan. And the demo video shown below.</p>   
                                     <img class="img-fluid rounded mb-3" src="assets/img/lab6/pi_yaw.png" alt="..." />
                                     <img class="img-fluid rounded mb-1" src="assets/img/lab6/pid_pi.png" alt="..." />
                                     <img class="img-fluid rounded mb-3" src="assets/img/lab6/pid_pi_pwm.png" alt="..." />
@@ -918,6 +917,15 @@
                                     <img class="img-fluid rounded mb-3" src="assets/img/lab6/rate.png" alt="..." />
                                     <h2 class="portfolio-title text-secondary mb-3" style="font-size: 2rem;">wind-up protection</h2>
                                     <p class="mb-4 text-start"></p>
+                                    <img class="img-fluid rounded mb-3" src="assets/img/lab6/windup_yaw.png" alt="..." />
+                                    <img class="img-fluid rounded mb-1" src="assets/img/lab6/wind_uppid.png" alt="..." />
+                                    <img class="img-fluid rounded mb-3" src="assets/img/lab6/windup_pwm.png" alt="..." />
+                                    <iframe class="mb-5" width="560" height="315" src="https://youtube.com/embed/MQ1C84UneKA" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>                                   
+                                    <h2 class="portfolio-title text-secondary mb-3" style="font-size: 2rem;">Different surface</h2>
+                                    <img class="img-fluid rounded mb-3" src="assets/img/lab6/windup_yaw.png" alt="..." />
+                                    <img class="img-fluid rounded mb-1" src="assets/img/lab6/wind_uppid.png" alt="..." />
+                                    <img class="img-fluid rounded mb-3" src="assets/img/lab6/windup_pwm.png" alt="..." />
+                                    <iframe class="mb-5" width="560" height="315" src="https://youtube.com/embed/ghW2zlgKjSo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>                                   
                                     <button class="btn btn-primary" data-bs-dismiss="modal">
                                         <i class="fas fa-xmark fa-fw"></i>
                                         Close Window
