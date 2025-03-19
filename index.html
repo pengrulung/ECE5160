@@ -888,13 +888,36 @@
                                     The integral term K<sub>i</sub> compensates for accumulated error over time. Even if the error is small, it can build up gradually. While K<sub>i</sub> helps eliminate steady-state error, setting it too high may result in excessive overshooting.  <br>
                                     The derivative term K<sub>d</sub> acts as a damping factor by considering the rate of change of error. It helps slow down corrections when the PI terms produce aggressive responses. However, one drawback of K<sub>d</sub> is that it can amplify noise, potentially leading to unstable behavior.</p>
                                     <h2 class="portfolio-title text-secondary mb-3" style="font-size: 2rem;">P Controller</h2>
-                                    <p class="mb-4 text-start">I started building my PID controller with a P controller. Since the task is to run a distance of 2-4 meters, my plan is to run at 100% speed when the error is about 4000mm and at 10% speed when the error is about 400mm. Thus, I began testing with Kp = 0.025. To be more conservative at the beginning, I limited the maximum speed to 45% (with a PWM value of about 100) if the speed exceeded 45%. However, with this setting, my robot still ran into the wall. I tried decreasing Kp slightly, and it turned out to work. As a result, I decided on Kp = 0.02. For other parameter settings, I set pid_pos_target to 500mm since I don't want my car to bump into the wall. The sc_pwm value is 2.55, which helps convert my p term to a PWM signal.<br>
-                                    Below is the code and the video.</p>
-                                    <script src="https://gist.github.com/pengrulung/4d7f73f2b751ac61dda59f1b85040da2.js"></script>
-                                    <iframe class="mb-5" width="560" height="315" src="https://youtube.com/embed/eG07RxKlP2M" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>                                   
+                                    <p class="mb-4 text-start">I started building my PID controller with a P controller. The task is orientation control, where I can assign an angle, and the robot car will rotate back to the assigned angle no matter how I push or rotate it. I assign a target angle in the command SET_ORI_PID.</p>
+                                    <script src="https://gist.github.com/pengrulung/9877a8071807d85072c991cb59b95217.js"></script>
+                                    <p class ="mb-4 text-start">I began testing with Kp = 2 and gradually increased the value. The sc_ori_pwm value is 2.55, which helps convert the P term into a PWM signal. I set the highest PWM value to 200 since I don't want my robot to spin too fast. After multiple tests, I finally chose Kp = 3.5. Below is the code.</p>
+                                    <p class ="mb-4 text-start">code explain here</p>
+                                    <script src="https://gist.github.com/pengrulung/a6b5d5c70d35c40d0f2b7807612c7100.js"></script>
+                                    <img class="img-fluid rounded mb-3" src="assets/img/lab6/p_yaw.png" alt="..." />
+                                    <img class="img-fluid rounded mb-1" src="assets/img/lab6/pid_p.png" alt="..." />
+                                    <img class="img-fluid rounded mb-3" src="assets/img/lab6/pid_p_pwm.png" alt="..." />
+                                    <iframe class="mb-5" width="560" height="315" src="https://youtube.com/embed/1Vru7o2h6hI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>                                   
+                                    <h2 class="portfolio-title text-secondary mb-3" style="font-size: 2rem;">PI Controller</h2>
                                     <p class="mb-4 text-start">I also plotted graphs showing ToF sensor data vs. time, P term vs. time, and PWM data vs. time. The ToF sensor shows the distance(mm) to the wall, and the P term represents the current error (the distance to the wall minus 500mm) multiplied by Pi (which I set to 0.02). The PWM data represents the value I assigned to the motor. These help me better understand how my car works and how I can adjust my plan.</p>   
-                                    
-                                    <p class="mb-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia neque assumenda ipsam nihil, molestias magnam, recusandae quos quis inventore quisquam velit asperiores, vitae? Reprehenderit soluta, eos quod consequuntur itaque. Nam.</p>
+                                    <p class="mb-4 text-start">Ki=1</p>
+                                    <p class ="mb-4 text-start">code explain here</p>
+                                    <script src="https://gist.github.com/pengrulung/689454d1cf90a5740a3bdf6e2fbe02bc.js"></script>
+                                    <img class="img-fluid rounded mb-3" src="assets/img/lab6/pi_yaw.png" alt="..." />
+                                    <img class="img-fluid rounded mb-1" src="assets/img/lab6/pid_pi.png" alt="..." />
+                                    <img class="img-fluid rounded mb-3" src="assets/img/lab6/pid_pi_pwm.png" alt="..." />
+                                    <iframe class="mb-5" width="560" height="315" src="https://youtube.com/embed/GcWCQh64XRA" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>                                   
+                                    <h2 class="portfolio-title text-secondary mb-3" style="font-size: 2rem;">PID Controller</h2>
+                                    <p class="mb-4 text-start">Kd=1.1</p>
+                                    ***code explain, code
+                                    <img class="img-fluid rounded mb-3" src="assets/img/lab6/pid_yaw.png" alt="..." />
+                                    <img class="img-fluid rounded mb-1" src="assets/img/lab6/pid_pid.png" alt="..." />
+                                    <img class="img-fluid rounded mb-3" src="assets/img/lab6/pid_motoe.png" alt="..." />
+                                    <iframe class="mb-5" width="560" height="315" src="https://youtube.com/embed/juQgJj-wjRQ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>                                   
+                                    <h2 class="portfolio-title text-secondary mb-3" style="font-size: 2rem;">Range/Sampling time discussion</h2>
+                                    <p class="mb-4 text-start">I also tested the DMP sampling rate and the main loop rate. The results are shown below. Compared to the ToF sampling rate from Lab 5, the DMP prepares the data faster than the ToF sensor.</p>
+                                    <img class="img-fluid rounded mb-3" src="assets/img/lab6/rate.png" alt="..." />
+                                    <h2 class="portfolio-title text-secondary mb-3" style="font-size: 2rem;">wind-up protection</h2>
+                                    <p class="mb-4 text-start"></p>
                                     <button class="btn btn-primary" data-bs-dismiss="modal">
                                         <i class="fas fa-xmark fa-fw"></i>
                                         Close Window
