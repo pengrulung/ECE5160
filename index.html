@@ -130,7 +130,7 @@
                             <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
                                 <div class="portfolio-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i></div>
                             </div>
-                            <img class="img-fluid" src="assets/img/portfolio/cabin.png" alt="..." />
+                            <img class="img-fluid" src="assets/img/portfolio/kf_distance_car.png" alt="..." />
                         </div>
                         <p class="text-center mt-2 fs-4 fw-bold">Lab7</p> 
                     </div>
@@ -964,7 +964,7 @@
                                 <div class="col-lg-8">
                                     <!-- Portfolio Modal - Title-->
                                     <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">Lab 7</h2>
-                                    <h2 class="portfolio-title text-secondary mb-0">huy</h2>
+                                    <h2 class="portfolio-title text-secondary mb-0">Kalman Filter</h2>
                                     <!-- Icon Divider-->
                                     <div class="divider-custom">
                                         <div class="divider-custom-line"></div>
@@ -972,24 +972,59 @@
                                         <div class="divider-custom-line"></div>
                                     </div>
                                     <!-- Portfolio Modal - Image-->
-                                    <img class="img-fluid rounded mb-5" src="assets/img/portfolio/car2.jpg" alt="..." width="300px"/>
+                                    <img class="img-fluid rounded mb-5" src="assets/img/portfolio/kf_distance_car.png" alt="..." width="600px"/>
                                     <!-- Portfolio Modal - Text-->
                                     <h2 class="portfolio-title text-secondary mb-3">Objective</h2>
-                                    <p class="mb-4 text-start">Lorem ipsum dolor sit amet, con</p>
-                                    <h2 class="portfolio-title text-secondary mb-3"style="font-size: 2rem;">Prelab</h2>
-                                    <p class="mb-4 text-start">To prepare for this lab, </p>
-                                    <img class="img-fluid rounded mb-5" src="assets/img/lab4/wire1.jpg" alt="..." />
-                                    <p class="mb-4 text-start">Our motors</p>                             
-                                    <h2 class="portfolio-title text-secondary mb-3" style="font-size: 2rem;">Task 1: </h2>
-                                    <p class="mb-4 text-start">After </p>
-                                    <img class="img-fluid rounded mb-5" src="assets/img/lab4/setup.png" alt="..." />
-                                    <h2 class="portfolio-title text-secondary mb-3" style="font-size: 2rem;">Task 2: </h2>
-                                    <p class="mb-4 text-start">Based on </p>
-                                    <h2 class="portfolio-title text-secondary mb-3" style="font-size: 2rem;">Task 3: </h2>
-                                    <h2 class="portfolio-title text-secondary mb-3" style="font-size: 2rem;">Task 4: </h2>
-                                    <p class="mb-4 text-start">Based on </p>
-                                    <h2 class="portfolio-title text-secondary mb-3" style="font-size: 2rem;">Additional tasks: Wind-up implementation and discussion</h2>
-                                    <p class="mb-4 text-start">Based on </p>
+                                    <p class="mb-4 text-start">In this lab, I will use a Kalman Filter to supplement my slowly sampled ToF sensor.</p>                
+                                    <h2 class="portfolio-title text-secondary mb-3" style="font-size: 2rem;">Estimate drag and momentum</h2>
+                                    <p class="mb-4 text-start">I need to estimate the drag and momentum terms for the A and B matrices to build the state-space model for my system. With the equations below, I can determine how to obtain the drag and momentum terms.</p>
+                                    <img class="img-fluid rounded mb-1" src="assets/img/lab7/eqation1.jpg" alt="..." />
+                                    <img class="img-fluid rounded mb-1" src="assets/img/lab7/eqation2.jpg" alt="..." />
+                                    <img class="img-fluid rounded mb-1" src="assets/img/lab7/eqation3.jpg" alt="..." />
+                                    <p class="mb-4 text-start">To find these values, I used a BLE command to set the PWM signal to 100, which is the maximum value in lab 5, and drive toward a wall while collecting ToF sensor data. With the top sensor and time information, I can calculate the velocity.</p>
+                                    <img class="img-fluid rounded mb-1" src="assets/img/lab7/distance.png" alt="..." />
+                                    <img class="img-fluid rounded mb-1" src="assets/img/lab7/speed.png" alt="..." />
+                                    <img class="img-fluid rounded mb-1" src="assets/img/lab7/motorinput.png" alt="..." />
+                                    <p class="mb-4 text-start">I found that the steady state is about 2.35 m/s, and the 90% rise time is roughly 2 seconds. The 90% time speed is 2 m/s, and u is 1(means 100 is my max PWM) Thus, the drag and the mass of the system are:</p>
+                                    <img class="img-fluid rounded mb-1" src="assets/img/lab7/dandm.png" alt="..." />
+                                    <h2 class="portfolio-title text-secondary mb-3" style="font-size: 2rem;">Initialize KF(Python)</h2>
+                                    <p class="mb-4 text-start">With the two value, I can compute the matrices A and B:</p>
+                                    <img class="img-fluid rounded mb-1" src="assets/img/lab7/aandb.png" alt="..." />
+                                    <p class="mb-4 text-start">Next, I discretize my matrices and identify the C matrix. C is an m×n matrix (where n is the number of dimensions in the state space and m is the number of outputs). I also initialized with the state vector x from the first of the ToF distance readings collected earlier. The code is shown below.</p>
+                                    <img class="img-fluid rounded mb-1" src="assets/img/lab7/candxadbd.png" alt="..." />
+                                    <p class="mb-4 text-start">To implement the Kalman filter, I still need to specify the process noise and sensor noise covariance matrices, which require a total of three covariance values.
+                                    <br>For the process noise, the sampling time for distance and velocity is 0.09 s. As for the measurement noise, I assume that the value is 20 mm, indicating that for each ToF sensor measurement, the likely error is less than 20 mm.
+                                    <br>From these values, I can define the process noise and sensor noise covariance matrices, which are computed below.</p>
+                                    <img class="img-fluid rounded mb-1" src="assets/img/lab7/sig.png" alt="..." />
+                                    <h2 class="portfolio-title text-secondary mb-3" style="font-size: 2rem;">Implement and test Kalman Filter in Jupyter (Python)</h2>
+                                    <p class="mb-4 text-start">I copied the Kalman Filter function provided in the lab guide into Jupyter Lab, and I created an array, kf_data, to store the results of the Kalman Filter.</p>
+                                    <img class="img-fluid rounded mb-3" src="assets/img/lab7/kf.png" alt="..." />
+                                    <p class="mb-4 text-start">I need to specify initial states and parameters. I converted the PWM values into the input sc_pwm, scaling them to the range [0, 1] by dividing by the step size of 100. The initial x vector is initialized with the ToF readings, and the sig matrix represents the initial state uncertainty. These variables are updated in each iteration of the Kalman Filter. The Kalman Filter is then called, and the results are stored in kf_data.</p>
+                                    <img class="img-fluid rounded mb-4" src="assets/img/lab7/init_kf.png" alt="..." />
+                                    <p class="mb-1 text-start">sig=[[5**2,0], [0,5**2]], sig_z=[400], sig_u=[[1111,0], [0,1111]]</p>
+                                    <img class="img-fluid rounded mb-1" src="assets/img/lab7/kf_0.png" alt="..." />
+                                    <p class="mb-4 text-start">With the result above, I tried adjusting sig_z because a value of 400 caused the Kalman Filter to trust the sensor data less. By reducing it to 100, the filter can trust the sensor data more, which helps decrease the lag in the estimation. </p>
+                                    <p class="mb-1 text-start">sig=[[5**2,0], [0,5**2]], sig_z=[100], sig_u=[[1111,0], [0,1111]]</p>
+                                    <img class="img-fluid rounded mb-1" src="assets/img/lab7/kf_1.png" alt="..." />
+                                    <p class="mb-4 text-start">Sig_u represents the confidence in the model. I tried increasing sig_u to sig_u=[[2500,0], [0,2500]], which decreased the confidence in the model, and got the following result:"</p>
+                                    <p class="mb-1 text-start">sig=[[5**2,0], [0,5**2]], sig_z=[100], sig_u=[[2500,0], [0,2500]]</p>
+                                    <img class="img-fluid rounded mb-1" src="assets/img/lab7/kf_2.png" alt="..." />
+                                    <h2 class="portfolio-title text-secondary mb-3" style="font-size: 2rem;">Implement the Kalman Filter on the Robot</h2>
+                                    <p class="mb-4 text-start">I set up two Bluetooth commands for running the Kalman filter on my robot car. One is RUN_KF, which sets the PID parameters, gets the initial distance for the initial setting of the Kalman filter, and triggers the PID controller with the Kalman filter. The other is GET_KF_DATA, which sends the data to the Jupyter Notebook, helping me with debugging and plotting. The code is shown below.</p>
+                                    <script src="https://gist.github.com/pengrulung/b2f1f514259c0d798863c541d72fac10.js"></script>
+                                    <p class="mb-4 text-start">I implemented a notify handler to receive and organize the data, which assists me in plotting and debugging.</p>
+                                    <script src="https://gist.github.com/pengrulung/b8e4052ac37495ab0f0a6610fd9cdbdb.js"></script>
+                                    <p class="mb-4 text-start">Next, I add the Kalman filter to my Arduino code, as shown below.</p>
+                                    <script src="https://gist.github.com/pengrulung/cb0641bfa625f1fcb17a14266e415a93.js"></script>
+                                    <p class="mb-4 text-start">I made some modifications to the PID controller from Lab 5, using the Kalman filter to estimate the value. The modified code is shown below.</p>
+                                    <script src="https://gist.github.com/pengrulung/6a97d39effefa1e7877597442f5c26c6.js"></script>
+                                    <p class="mb-4 text-start">For the first time I tested my Kalman filter, I got the following result, showing that the Kalman filter is not working correctly and updating too slowly.</p>
+                                    <img class="img-fluid rounded mb-1" src="assets/img/lab7/kf_fail.png" alt="..." />
+                                    <p class="mb-4 text-start">After carefully checking, I found out that my delta t was wrong. It should be the dt between each main loop, which represents the prediction rate, but I had set it as the dt between the times when the ToF sensor received new data. After fixing it, the result is now reasonable. Below are my Kalman filter, the measured data vs. time, my P/I/D terms vs. time, and the motor PWM vs. time and the testing video.</p>
+                                    <img class="img-fluid rounded mb-1" src="assets/img/lab7/kf_distance_car.png" alt="..." />
+                                    <img class="img-fluid rounded mb-1" src="assets/img/lab7/kf_pid_car.png" alt="..." />
+                                    <img class="img-fluid rounded mb-1" src="assets/img/lab7/kf_pwm_car.png" alt="..." />
+                                    <iframe class="mb-5" width="560" height="315" src="https://youtube.com/embed/zcN7T2C7TZc" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>                                   
                                     <button class="btn btn-primary" data-bs-dismiss="modal">
                                         <i class="fas fa-xmark fa-fw"></i>
                                         Close Window
