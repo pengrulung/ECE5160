@@ -1141,7 +1141,7 @@
                                     <p class="mb-4 text-start">Next, I added the command GET_TURN_DATA, so the robot can send the data to the computer.</p>
                                     <script src="https://gist.github.com/pengrulung/f2c6db1667681c12dbcb94e0423115c9.js"></script>
                                     <script src="https://gist.github.com/pengrulung/2bb3a63246bc37151c8376fce0229087.js"></script>
-                                    <p class="mb-4 text-start">The distance vs. time plots are shown below.</p>
+                                    <p class="mb-4 text-start">I started with the same orientation each time, where the ToF sensor was positioned at y = 0, facing the positive x-direction, and began rotating to the right. The distance vs. time plots are shown below.</p>
                                     <p class="mb-5 text-start">Point 1 (-3, -2)</p>
                                     <img class="img-fluid rounded mb-5" src="assets/img/lab9/-3-2 disvst.png" alt="..." width="100%"/>
                                     <img class="img-fluid rounded mb-5" src="assets/img/lab9/sec-3-2d.png" alt="..." width="100%"/>
@@ -1157,6 +1157,7 @@
                                     <p class="mb-5 text-start">Point 5 ( 0, 0)</p>
                                     <img class="img-fluid rounded mb-5" src="assets/img/lab9/00d.png" alt="..." width="100%"/>
                                     <img class="img-fluid rounded mb-5" src="assets/img/lab9/sec00d.png" alt="..." width="100%"/>
+                                    <p class="mb-4 text-start">I recorded the data twice and found that the values were not always consistent. It’s possible that the angle measurements were affected by noise in the IMU, causing the system to record data from slightly different positions. It’s also possible that the ToF sensor did not function properly at a few data points.</p>
                                     <h2 class="portfolio-title text-secondary mb-3" style="font-size: 2rem;">Merge and Plot your readings</h2>
                                     <p class="mb-4 text-start">With distance and angle data, I can calculate the x and y values. To align more closely with the map, I added 8 cm to my distance data since the distance from the center to my ToF sensor is 8 cm.</p>
                                     <img class="img-fluid rounded mb-5" src="assets/img/lab9/car.jpg" alt="..." />
@@ -1204,8 +1205,8 @@
                                         <img class="img-fluid-side rounded mb-5" src="assets/img/lab9/5-3S.png" alt="..." width="100%"/>
                                     </div>
                                     <div class="img-container">
-                                        <img class="img-fluid-side rounded mb-5" src="assets/img/lab9/sec5-3d.png" alt="..." width="100%"/>
-                                        <img class="img-fluid-side rounded mb-5" src="assets/img/lab9/5-3S.png" alt="..." width="100%"/>
+                                        <img class="img-fluid-side rounded mb-5" src="assets/img/lab9/sec5-3dd.png" alt="..." width="100%"/>
+                                        <img class="img-fluid-side rounded mb-5" src="assets/img/lab9/sec5-3s.png" alt="..." width="100%"/>
                                     </div>
                                     <p class="mb-4 text-start">Next, I transformed the data into the global frame by adding 5 to the x values and by substracing 3 from the y values.</p>
                                     <img class="img-fluid rounded mb-5" src="assets/img/lab9/sec5-3sg.png" alt="..." />
@@ -1215,7 +1216,7 @@
                                         <img class="img-fluid-side rounded mb-5" src="assets/img/lab9/00 s.png" alt="..." width="100%"/>
                                     </div>
                                     <div class="img-container">
-                                        <img class="img-fluid-side rounded mb-5" src="assets/img/lab9/sec00d.png" alt="..." width="100%"/>
+                                        <img class="img-fluid-side rounded mb-5" src="assets/img/lab9/sec00dd.png" alt="..." width="100%"/>
                                         <img class="img-fluid-side rounded mb-5" src="assets/img/lab9/sec00s.png" alt="..." width="100%"/>
                                     </div>
                                     <p class="mb-4 text-start">Since it's the origin, I didn't need to do anything else.</p>
@@ -1225,7 +1226,7 @@
                                     <h2 class="portfolio-title text-secondary mb-3" style="font-size: 2rem;">Convert to Line-Based Map</h2>
                                     <p class="mb-4 text-start">Next, I manually entered the coordinates for the walls and boxes, and plotted them on my map along with the data points. The code is shown below.</p>
                                     <script src="https://gist.github.com/pengrulung/34d955a92c1decff8c1fef09666c5d96.js"></script>
-                                    <img class="img-fluid rounded mb-5" src="assets/img/lab9/finalwith lines.png" alt="..." />
+                                    <img class="img-fluid rounded mb-5" src="assets/img/lab9/finalmap.png" alt="..." />
                                     <p class="mb-4 text-start">I now have four variables—wall_starts, wall_ends, box_starts, and box_ends—each containing coordinate pairs:
                                     <br>wall_starts = [[0.5, -4.5], [6.5, -4.5], [6.5, 4.6], [6.5, 4.6], [-2.45, 4.6], [-2.45, 0.7], [-5.25, 0.7], [-5.25, -4.2], [-0.7, -4.2], [-0.7, -2.5]]
                                     <br>wall_ends   = [[6.5, -4.5], [6.5, 4.6], [6.5, 4.6], [-2.45, 4.6], [-2.45, 0.7], [-5.25, 0.7], [-5.25, -4.2], [-0.7, -4.2], [-0.7, -2.5], [0.5, -2.5]]
