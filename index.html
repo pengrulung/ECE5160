@@ -150,7 +150,7 @@
                             <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
                                 <div class="portfolio-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i></div>
                             </div>
-                            <img class="img-fluid" src="assets/img/portfolio/submarine.png" alt="..." />
+                            <img class="img-fluid" src="assets/img/portfolio/map.jpg" alt="..." />
                         </div>
                         <p class="text-center mt-2 fs-4 fw-bold">Lab9</p> 
                     </div>
@@ -1110,7 +1110,7 @@
                                 <div class="col-lg-8">
                                     <!-- Portfolio Modal - Title-->
                                     <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">Lab 9</h2>
-                                    <h2 class="portfolio-title text-secondary mb-0">huy</h2>
+                                    <h2 class="portfolio-title text-secondary mb-0">Mapping</h2>
                                     <!-- Icon Divider-->
                                     <div class="divider-custom">
                                         <div class="divider-custom-line"></div>
@@ -1118,23 +1118,94 @@
                                         <div class="divider-custom-line"></div>
                                     </div>
                                     <!-- Portfolio Modal - Image-->
-                                    <img class="img-fluid rounded mb-5" src="assets/img/portfolio/car2.jpg" alt="..." width="300px"/>
+                                    <img class="img-fluid rounded mb-5" src="assets/img/portfolio/map.jpg" alt="..." width="300px"/>
                                     <!-- Portfolio Modal - Text-->
                                     <h2 class="portfolio-title text-secondary mb-3">Objective</h2>
-                                    <p class="mb-4 text-start">Lorem ipsum dolor sit amet, con</p>
+                                    <p class="mb-4 text-start">In this lab, I am going to map out a static room, which will be used later for localization and navigation tasks. I will place my robot in different marked locations in the room and have it spin around its axis while collecting ToF readings. With the data collected, I will apply transformation matrices, plot the points, and build the map.</p>
                                     <h2 class="portfolio-title text-secondary mb-3"style="font-size: 2rem;">Prelab</h2>
-                                    <p class="mb-4 text-start">To prepare for this lab, </p>
-                                    <img class="img-fluid rounded mb-5" src="assets/img/lab4/wire1.jpg" alt="..." />
-                                    <p class="mb-4 text-start">Our motors</p>                             
-                                    <h2 class="portfolio-title text-secondary mb-3" style="font-size: 2rem;">Task 1: </h2>
-                                    <p class="mb-4 text-start">After </p>
-                                    <img class="img-fluid rounded mb-5" src="assets/img/lab4/setup.png" alt="..." />
-                                    <h2 class="portfolio-title text-secondary mb-3" style="font-size: 2rem;">Task 2: </h2>
-                                    <p class="mb-4 text-start">Based on </p>
-                                    <h2 class="portfolio-title text-secondary mb-3" style="font-size: 2rem;">Task 3: </h2>
-                                    <h2 class="portfolio-title text-secondary mb-3" style="font-size: 2rem;">Task 4: </h2>
-                                    <p class="mb-4 text-start">Based on </p>
-                                    <h2 class="portfolio-title text-secondary mb-3" style="font-size: 2rem;">Additional tasks: Wind-up implementation and discussion</h2>
+                                    <p class="mb-4 text-start">In this lab, I need the orientation control implemented in Lab 6, and I should also review Lecture 2 on transformation matrices.</p>                        
+                                    <h2 class="portfolio-title text-secondary mb-3" style="font-size: 2rem;">Control</h2>
+                                    <p class="mb-4 text-start">The first step was to have the robot rotate on its axis to collect ToF sensor readings. I decided to use Option 2: orientation control in this lab, with approximately 20-degree increments per full 360-degree rotation, resulting in 18 ToF data readings. This should provide enough resolution to build the map.</p>
+                                    <p class="mb-4 text-start">I added the turn-around function here, which sets the target angle to the current angle plus 20 degrees. It also calls the orientation PID control from Lab 6 to turn and collect distance data from the Time-of-Flight sensor. Based on the PID controller in Lab 6, I added a condition so that if the error is less than 2 degrees, it will trigger the turn-around function again. This process will repeat 18 times.</p>
+                                    <script src="https://gist.github.com/pengrulung/dcfe4e00ca9c7c312f87306c58f75c6b.js"></script>
+                                    <script src="https://gist.github.com/pengrulung/dc8077082615f9c513a50bfc1fae82c9.js"></script>
+                                    <p class="mb-4 text-start">I have the video below, along with the degrees vs. time data.</p>
+                                    <img class="img-fluid rounded mb-5" src="assets/img/lab9/degree.png" alt="..." />
+                                    <iframe class="mb-1" width="560" height="315" src="https://youtube.com/embed/VyUOwy2ksCI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>                                      
+                                    <p class="mb-4 text-start">Note: The video and the graph do not match. The video was recorded while I was still making modifications to the PID parameters and the deadband value. The graph was recorded after I completed those modifications.</p>
+                                    <p class="mb-4 text-start">Based on the data shown in the graph, the robot’s turns are mostly reliable; however, there is about a 10 cm drift after each turn. Therefore, it’s possible that I will have an average error of around 10 cm when running the robot in the middle of a 4×4 m empty room.</p>
+                                    <h2 class="portfolio-title text-secondary mb-3" style="font-size: 2rem;">Read out Distances</h2>
+                                    <p class="mb-4 text-start">The robot was placed at the following points: (-3, -2), (0, 3), (5, 3), (5, -3), and (0, 0). The image below shows the location of each point in the lab.</p>
+                                    <img class="img-fluid rounded mb-5" src="assets/img/lab9/mappp.png" alt="..." />
+                                    <p class="mb-4 text-start">I also added the code to read the ToF data after each 20-degree increment, which was implemented earlier in the control section.</p>
+                                    <p class="mb-4 text-start">Next, I added the command GET_TURN_DATA, so the robot can send the data to the computer.</p>
+                                    <script src="https://gist.github.com/pengrulung/f2c6db1667681c12dbcb94e0423115c9.js"></script>
+                                    <script src="https://gist.github.com/pengrulung/2bb3a63246bc37151c8376fce0229087.js"></script>
+                                    <p class="mb-4 text-start">The distance vs. time plots are shown below.</p>
+                                    <p class="mb-5 text-start">Point 1 (-3, -2)</p>
+                                    <img class="img-fluid rounded mb-5" src="assets/img/lab9/-3-2 disvst.png" alt="..." width="100%"/>
+                                    <img class="img-fluid rounded mb-5" src="assets/img/lab9/sec-3-2d.png" alt="..." width="100%"/>
+                                    <p class="mb-5 text-start">Point 2 ( 5,  3)</p>
+                                    <img class="img-fluid rounded mb-5" src="assets/img/lab9/53D.png" alt="..." width="100%"/>
+                                    <p class="mb-5 text-start">Point 3 ( 0,  3)</p>
+                                    <img class="img-fluid rounded mb-5" src="assets/img/lab9/03D.png" alt="..." width="100%"/>
+                                    <p class="mb-5 text-start">Point 4 ( 5, -3)</p>
+                                    <img class="img-fluid rounded mb-5" src="assets/img/lab9/5-3D.png" alt="..." width="100%"/>
+                                    <img class="img-fluid rounded mb-5" src="assets/img/lab9/sec5-3d.png" alt="..." width="100%"/>
+                                    <p class="mb-5 text-start">Point 5 ( 0, 0)</p>
+                                    <img class="img-fluid rounded mb-5" src="assets/img/lab9/00d.png" alt="..." width="100%"/>
+                                    <h2 class="portfolio-title text-secondary mb-3" style="font-size: 2rem;">Merge and Plot your readings</h2>
+                                    <p class="mb-4 text-start">With distance and angle data, I can calculate the x and y values. To align more closely with the map, I added 8 cm to my distance data since the distance from the center to my ToF sensor is 8 cm.</p>
+                                    <img class="img-fluid rounded mb-5" src="assets/img/lab9/car.jpg" alt="..." />
+                                    <p class="mb-4 text-start">For the angle obtained from orientation control, the value ranges from -180 to 180, so I adjusted it so that the first value is 0 and transformed it into a 0-360 range. 
+                                    <br>However, I found that the measurements were slightly skewed from what I expected, which may be due to DMP drifting. To fix this, I added a constant angle offset to the data sets. 
+                                    <br>Next, I calculated the x distance by multiplying the distance value with the cosine of the angle, and the y distance by multiplying the distance value with the negative sine of the angle. The code is shown below.</p>
+                                    <script src="https://gist.github.com/pengrulung/4dd3bd683b71bb21b73b2d4807e18b9f.js"></script>
+                                    <p class="mb-4 text-start">Below are polar plots, and scatter plot on the XY coordinates (without making adjustments to each point).</p>
+                                    <p class="mb-5 text-start">Point 1 (-3, -2)</p>
+                                    <div class="img-container">
+                                        <img class="img-fluid-side rounded mb-5" src="assets/img/lab9/-3-2 polar.png" alt="..." width="100%"/>
+                                        <img class="img-fluid-side rounded mb-5" src="assets/img/lab9/-3-2 s.png" alt="..." width="100%"/>
+                                    </div>
+                                    <div class="img-container">
+                                        <img class="img-fluid-side rounded mb-5" src="assets/img/lab9/sec-3-2dd.png" alt="..." width="100%"/>
+                                        <img class="img-fluid-side rounded mb-5" src="assets/img/lab9/sec-3-2s.png" alt="..." width="100%"/>
+                                    </div>
+                                    <p class="mb-4 text-start">Next, I transformed the data into the global frame by subtracting 3 from the x values and 2 from the y values.</p>
+                                    <img class="img-fluid rounded mb-5" src="assets/img/lab9/sec-3-2sg.png" alt="..." />
+                                    <p class="mb-5 text-start">Point 2 ( 5,  3)</p>
+                                    <div class="img-container">
+                                        <img class="img-fluid-side rounded mb-5" src="assets/img/lab9/53DD.png" alt="..." width="100%"/>
+                                        <img class="img-fluid-side rounded mb-5" src="assets/img/lab9/53S.png" alt="..." width="100%"/>
+                                    </div>
+                                    <div class="img-container">
+                                        <img class="img-fluid-side rounded mb-5" src="assets/img/lab9/sec-3-2dd.png" alt="..." width="100%"/>
+                                        <img class="img-fluid-side rounded mb-5" src="assets/img/lab9/sec-3-2s.png" alt="..." width="100%"/>
+                                    </div>
+                                    <p class="mb-4 text-start">Next, I transformed the data into the global frame by subtracting 3 from the x values and 2 from the y values.</p>
+                                    <img class="img-fluid rounded mb-5" src="assets/img/lab9/sec-3-2sg.png" alt="..." />
+                                    <p class="mb-5 text-start">Point 3 ( 0,  3)</p>
+                                    <div class="img-container">
+                                        <img class="img-fluid-side rounded mb-5" src="assets/img/lab9/03DD.png" alt="..." width="100%"/>
+                                        <img class="img-fluid-side rounded mb-5" src="assets/img/lab9/03S.png" alt="..." width="100%"/>
+                                    </div>
+                                    <p class="mb-5 text-start">Point 4 ( 5, -3)</p>
+                                    <div class="img-container">
+                                        <img class="img-fluid-side rounded mb-5" src="assets/img/lab9/5-3DD.png" alt="..." width="100%"/>
+                                        <img class="img-fluid-side rounded mb-5" src="assets/img/lab9/5-3S.png" alt="..." width="100%"/>
+                                    </div>
+                                    <div class="img-container">
+                                        <img class="img-fluid-side rounded mb-5" src="assets/img/lab9/sec5-3d.png" alt="..." width="100%"/>
+                                        <img class="img-fluid-side rounded mb-5" src="assets/img/lab9/5-3S.png" alt="..." width="100%"/>
+                                    </div>
+                                    <p class="mb-4 text-start">Next, I transformed the data into the global frame by adding 5 from the x values and by substracing 3 from the y values.</p>
+                                    <img class="img-fluid rounded mb-5" src="assets/img/lab9/sec5-3sg.png" alt="..." />
+                                    <p class="mb-5 text-start">Point 5 ( 0, 0)</p>
+                                    <div class="img-container">
+                                        <img class="img-fluid-side rounded mb-5" src="assets/img/lab9/00dd.png" alt="..." width="100%"/>
+                                        <img class="img-fluid-side rounded mb-5" src="assets/img/lab9/00 s.png" alt="..." width="100%"/>
+                                    </div>
+                                    <h2 class="portfolio-title text-secondary mb-3" style="font-size: 2rem;">Convert to Line-Based Map</h2>
                                     <p class="mb-4 text-start">Based on </p>
                                     <button class="btn btn-primary" data-bs-dismiss="modal">
                                         <i class="fas fa-xmark fa-fw"></i>
