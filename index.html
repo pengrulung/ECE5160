@@ -1348,7 +1348,7 @@
             </div>
         </div>
         <!-- Portfolio Modal 11-->
-        <div class="portfolio-modal modal fade" id="portfolioModal8" tabindex="-1" aria-labelledby="portfolioModal8" aria-hidden="true">
+        <div class="portfolio-modal modal fade" id="portfolioModal11" tabindex="-1" aria-labelledby="portfolioModal11" aria-hidden="true">
             <div class="modal-dialog modal-xl">
                 <div class="modal-content">
                     <div class="modal-header border-0"><button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button></div>
@@ -1369,14 +1369,17 @@
                                     <img class="img-fluid rounded mb-5" src="assets/img/portfolio/cabin.png" alt="..." width="300px"/>
                                     <!-- Portfolio Modal - Text-->
                                     <h2 class="portfolio-title text-secondary mb-3">Objective</h2>
-                                    <p class="mb-4 text-start">In this lab, I am going to implement grid localization using Bayes filter.</p>
-                                    <h2 class="portfolio-title text-secondary mb-3"style="font-size: 2rem;">Prelab</h2>
-                                    <p class="mb-4 text-start">To prepare for this lab, I need to set up the simulator. I need to install pip packages, ensure the tkinter set up correctly and install Box2D package.</p>
-                                    <h2 class="portfolio-title text-secondary mb-3" style="font-size: 2rem;">Controlled Stunt: Drift</h2>
+                                    <p class="mb-4 text-start">In this lab, I will implement localization using the Bayes filter on a real robot. Since the robot's motion is too noisy to make the prediction step useful, I will perform only the update step, using data from the ToF sensor during 360-degree scans.</p>                                    
+                                    <h2 class="portfolio-title text-secondary mb-3">Prelab</h2>
+                                    <p class="mb-4 text-start">To prepare for the lab, I need the background knowledge covered in the lecture, as well as the simulation setup and the observation loop for a 360-degree turn with 20-degree increments and ToF readings, which I already completed in the previous lab, along with setting up the base code.</p>
+                                    <h2 class="portfolio-title text-secondary mb-3" style="font-size: 2rem;">Task 1: Test Localization in Simulation</h2>
+                                    <p class="mb-4 text-start">I run the notebook lab11_sim.ipynb and take a screenshot of the final plot. The raw odometry model is shown in red, the ground truth in green, and the Bayes filter in blue.</p>
+                                    <img class="img-fluid rounded mb-1" src="assets/img/lab11/task1.png" alt="..." />
                                     <p class="mb-4 text-start">I set the starting point to be 2500 mm from the wall. Next, I separated my controlled stunt into three steps. The first is position control, which includes a Kalman filter and stops the robot within 914 mm from the wall. The second step uses orientation control to initiate a 180-degree turn after stopping in front of the wall. The final step is returning to the starting point, which is performed using open-loop control without any sensors or PID.</p>
                                     <p class="mb-4 text-start">For the first step, I used what I implemented in Lab 7. The only change was adjusting the target distance to 900 mm. The recorded video is shown below.</p>
                                     <iframe class="mb-5" width="560" height="315" src="https://youtube.com/embed/MIFKpKfS9o0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>                                   
                                     <p class="mb-4 text-start">After making sure the Kalman filter works and the robot stops within 914 mm of the wall, I added orientation control to implement the 180-degree turn.</p>
+                                    <h2 class="portfolio-title text-secondary mb-3" style="font-size: 2rem;">Task 2: Run the Update Step</h2>
                                     <p class="mb-4 text-start">With the Lab 6 orientation control in hand, I directly used the function I previously created to handle orientation. I added some code to trigger when the robot reaches 914 mm from the wall—at that point, it stops the current position control, assigns the target angle for a 180-degree turn based on the current orientation, and then starts the orientation control.</p>
                                     <script src="https://gist.github.com/pengrulung/058e024d87fabe3db63dcfcded85ef54.js"></script>
                                     <p class="mb-4 text-start">Initially, when attempting a 180-degree turn, the robot would spin in multiple circles before settling near the target angle, as shown in the first video below. After re-tuning the PID parameters for orientation control by decreasing the proportional term and increasing the derivative term (Kp = 0.4, Ki = 0.1, Kd = 20), the robot is now able to perform the 180-degree turn more effectively—though it still occasionally deviates by about 5 degrees. This improved behavior is demonstrated in the second video below.</p>
@@ -1411,7 +1414,7 @@
             </div>
         </div>
         <!-- Portfolio Modal 12-->
-        <div class="portfolio-modal modal fade" id="portfolioModal8" tabindex="-1" aria-labelledby="portfolioModal8" aria-hidden="true">
+        <div class="portfolio-modal modal fade" id="portfolioModal12" tabindex="-1" aria-labelledby="portfolioModal12" aria-hidden="true">
             <div class="modal-dialog modal-xl">
                 <div class="modal-content">
                     <div class="modal-header border-0"><button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button></div>
