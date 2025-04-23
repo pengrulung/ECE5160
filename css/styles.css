@@ -8007,6 +8007,11 @@ textarea.form-control-lg {
   text-align: left !important;
 }
 
+.text-big {
+  text-align: left !important;
+  font-size: 1.5rem; 
+}
+
 .text-end {
   text-align: right !important;
 }
