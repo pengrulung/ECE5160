@@ -1,7 +1,7 @@
 Website: https://pengrulung.github.io/ECE5160/
 
-Lab 1: Artemis and Bluetooth
-Lab 2: IMU
+Lab 1: Artemis and Bluetooth  <br>
+Lab 2: IMU 
 Lab 3: ToF
 Lab 4: Motor Drivers and Open Loop Control
 Lab 5: Linear PID and Linear Interpolation
