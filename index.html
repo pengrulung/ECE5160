@@ -1375,34 +1375,25 @@
                                     <p class="mb-4 text-start">To prepare for the lab, I need the background knowledge covered in the lecture, as well as the simulation setup and the observation loop for a 360-degree turn with 20-degree increments and ToF readings, which I already completed in the previous lab, along with setting up the base code.</p>
                                     <h2 class="portfolio-title text-secondary mb-3" style="font-size: 2rem;">Task 1: Test Localization in Simulation</h2>
                                     <p class="mb-4 text-start">I run the notebook lab11_sim.ipynb and take a screenshot of the final plot. The raw odometry model is shown in red, the ground truth in green, and the Bayes filter in blue.</p>
-                                    <img class="img-fluid rounded mb-1" src="assets/img/lab11/task1.png" alt="..." />
-                                    <p class="mb-4 text-start">I set the starting point to be 2500 mm from the wall. Next, I separated my controlled stunt into three steps. The first is position control, which includes a Kalman filter and stops the robot within 914 mm from the wall. The second step uses orientation control to initiate a 180-degree turn after stopping in front of the wall. The final step is returning to the starting point, which is performed using open-loop control without any sensors or PID.</p>
-                                    <p class="mb-4 text-start">For the first step, I used what I implemented in Lab 7. The only change was adjusting the target distance to 900 mm. The recorded video is shown below.</p>
-                                    <iframe class="mb-5" width="560" height="315" src="https://youtube.com/embed/MIFKpKfS9o0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>                                   
-                                    <p class="mb-4 text-start">After making sure the Kalman filter works and the robot stops within 914 mm of the wall, I added orientation control to implement the 180-degree turn.</p>
+                                    <img class="img-fluid rounded mb-4" src="assets/img/lab11/task1.png" alt="..." />
                                     <h2 class="portfolio-title text-secondary mb-3" style="font-size: 2rem;">Task 2: Run the Update Step</h2>
-                                    <p class="mb-4 text-start">With the Lab 6 orientation control in hand, I directly used the function I previously created to handle orientation. I added some code to trigger when the robot reaches 914 mm from the wall—at that point, it stops the current position control, assigns the target angle for a 180-degree turn based on the current orientation, and then starts the orientation control.</p>
-                                    <script src="https://gist.github.com/pengrulung/058e024d87fabe3db63dcfcded85ef54.js"></script>
-                                    <p class="mb-4 text-start">Initially, when attempting a 180-degree turn, the robot would spin in multiple circles before settling near the target angle, as shown in the first video below. After re-tuning the PID parameters for orientation control by decreasing the proportional term and increasing the derivative term (Kp = 0.4, Ki = 0.1, Kd = 20), the robot is now able to perform the 180-degree turn more effectively—though it still occasionally deviates by about 5 degrees. This improved behavior is demonstrated in the second video below.</p>
-                                    <iframe class="mb-5" width="560" height="315" src="https://youtube.com/embed/gs1XTbR48Is" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>                                   
-                                    <iframe class="mb-5" width="560" height="315" src="https://youtube.com/embed/2zpsWzM6e6Q" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>                                   
-                                    <p class="mb-4 text-start">Next, I add movement for my robot to return to the starting point. After testing, I found that a motor PWM of 230 and a delay of 550 ms and stopping work well. Below is my code and video.</p>
-                                    <script src="https://gist.github.com/pengrulung/348b75cd95c51a255d8f98106aaec3e3.js"></script>
-                                    <iframe class="mb-5" width="560" height="315" src="https://youtube.com/embed/qVVtYIteREk" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>                                      
-                                    <p class="mb-4 text-start">After that, I attempted to increase the robot's speed by raising the proportional term in the position control PID. The final tuned values were Kp = 0.031, Ki = 0.00001, and Kd = 0.008. Below, I present the corresponding distance data, as well as the PID P-term, I-term, D-term, and motor PWM output.</p>
-                                    <img class="img-fluid rounded mb-1" src="assets/img/lab8/dis_pos.png" alt="..." />
-                                    <img class="img-fluid rounded mb-1" src="assets/img/lab8/pos_pid.png" alt="..." />
-                                    <img class="img-fluid rounded mb-1" src="assets/img/lab8/pos_pwm.png" alt="..." />
-                                    <p class="mb-4 text-start">I also recorded the degree data along with the PID P-term, I-term, D-term, and motor PWM output for orientation control.</p>
-                                    <img class="img-fluid rounded mb-1" src="assets/img/lab8/ori_deg.png" alt="..." />
-                                    <img class="img-fluid rounded mb-1" src="assets/img/lab8/ori_pid.png" alt="..." />
-                                    <img class="img-fluid rounded mb-1" src="assets/img/lab8/ori_pwm.png" alt="..." />
-                                    <p class="mb-4 text-start">Three final demonstration videos are included to show the results.</p>
-                                    <iframe class="mb-5" width="560" height="315" src="https://youtube.com/embed/oZf60VPBnTc" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>                                      
-                                    <iframe class="mb-5" width="560" height="315" src="https://youtube.com/embed/XqY7UKNly8I" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>                                     
-                                    <iframe class="mb-5" width="560" height="315" src="https://youtube.com/embed/pJNZUtsTlbg" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>                                      
-                                    <p class="mb-4 text-start">In conclusion, I used a drifting approach to perform the stunt. A Kalman filter was applied for position estimation, and a PID controller was used to move the robot forward toward the wall. Orientation control was implemented for turning, assisted by the Digital Motion Processor (DMP), and the robot was guided back to the starting point by assigning appropriate motor values.
-                                    <br> The total fastest time for the robot to start from the initial position, move forward, perform a 180-degree turn, and return to the starting point was 3.4 seconds.</p>
+                                    // implement the member function perform_observation_loop 
+                                    // explain
+                                    // also degree
+                                    // video upload
+                                    <p class="mb-3 text-big">(-3 ft ,-2 ft ,0 deg)</p>
+                                    <img class="img-fluid rounded mb-3" src="assets/img/lab11/-3-2plot.png" alt="..." width="80%"/>
+                                    <p class="mb-3 text-big">(0 ft,3 ft, 0 deg)</p>
+                                    <img class="img-fluid rounded mb-3" src="assets/img/lab11/00plot.png" alt="..." width="80%"/>
+                                    <p class="mb-3 text-big">(5 ft,-3 ft, 0 deg)</p>
+                                    <img class="img-fluid rounded mb-3" src="assets/img/lab11/5-3plot.png" alt="..." width="80%"/>
+                                    <p class="mb-3 text-big">(5 ft,3 ft, 0 deg)</p>
+                                    <img class="img-fluid rounded mb-3" src="assets/img/lab11/53plot.png" alt="..." width="80%"/>
+                                    <p class="mb-3 text-big">(0 ft,0 ft, 0 deg)</p>
+                                    <img class="img-fluid rounded mb-3" src="assets/img/lab11/00plot.png" alt="..." width="80%"/>
+                                    // discuss and how close  some points are quite close(degree might 10 -10 gap) 
+                                    // repeat again and  robot localize better or not?
+                                    
                                     <button class="btn btn-primary" data-bs-dismiss="modal">
                                         <i class="fas fa-xmark fa-fw"></i>
                                         Close Window
