@@ -170,7 +170,7 @@
                             <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
                                 <div class="portfolio-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i></div>
                             </div>
-                            <img class="img-fluid" src="assets/img/portfolio/cake.png" alt="..." />
+                            <img class="img-fluid" src="assets/img/portfolio/-3-2plot.png" alt="..." />
                         </div>
                         <p class="text-center mt-2 fs-4 fw-bold">Lab11</p> 
                     </div>
@@ -1367,7 +1367,7 @@
                                         <div class="divider-custom-line"></div>
                                     </div>
                                     <!-- Portfolio Modal - Image-->
-                                    <img class="img-fluid rounded mb-5" src="assets/img/portfolio/cabin.png" alt="..." width="300px"/>
+                                    <img class="img-fluid rounded mb-5" src="assets/img/lab11/-3-2plot.png" alt="..." width="300px"/>
                                     <!-- Portfolio Modal - Text-->
                                     <h2 class="portfolio-title text-secondary mb-3">Objective</h2>
                                     <p class="mb-4 text-start">In this lab, I will implement localization using the Bayes filter on a real robot. Since the robot's motion is too noisy to make the prediction step useful, I will perform only the update step, using data from the ToF sensor during 360-degree scans.</p>                                    
@@ -1377,23 +1377,51 @@
                                     <p class="mb-4 text-start">I run the notebook lab11_sim.ipynb and take a screenshot of the final plot. The raw odometry model is shown in red, the ground truth in green, and the Bayes filter in blue.</p>
                                     <img class="img-fluid rounded mb-4" src="assets/img/lab11/task1.png" alt="..." />
                                     <h2 class="portfolio-title text-secondary mb-3" style="font-size: 2rem;">Task 2: Run the Update Step</h2>
-                                    // implement the member function perform_observation_loop 
-                                    // explain
-                                    // also degree
-                                    // video upload
+                                    <p class="'mb-4 text-start">To collect data, we rotate the robot counterclockwise by 20 degrees each time and read the ToF sensor data—a procedure I already implemented in a previous lab. I added the observation_loop command to the Arduino to send the necessary data, and I also added a notify handler in Python to receive the data.</p>
+                                    <script src="https://gist.github.com/pengrulung/7a85a6a449323715813409698e7e7c50.js"></script>
+                                    <script src="https://gist.github.com/pengrulung/3cd55ae313c54cb83efa49d63e029b00.js"></script>
+                                    <p class="mb-4 text-start">I implement the member function perform_observation_loop of class RealRobot to help us collect and organize the data that will be used in the update step.</p>
+                                    <script src="https://gist.github.com/pengrulung/0a00c187e80f53b5a48a81e907a6bd0d.js"></script>
+                                    <p class="mb-4 text-start">Below are the results at the four assigned marked positions and at (0,0).</p>
                                     <p class="mb-3 text-big">(-3 ft ,-2 ft ,0 deg)</p>
                                     <img class="img-fluid rounded mb-3" src="assets/img/lab11/-3-2plot.png" alt="..." width="80%"/>
+                                    <p class="mb-4 text-start">Ground Truth (ft, ft, angle): (-3,-2,0)  
+                                    <br>Ground Truth (m, m, angle): (-0.914,-0.607,0)
+                                    <br>Belief (m, m, angle): (-0.914,-0.610,10)
+                                    <br>Belief Probability: 1.0
+                                    </p>
                                     <p class="mb-3 text-big">(0 ft,3 ft, 0 deg)</p>
-                                    <img class="img-fluid rounded mb-3" src="assets/img/lab11/00plot.png" alt="..." width="80%"/>
+                                    <img class="img-fluid rounded mb-3" src="assets/img/lab11/03plot.png" alt="..." width="80%"/>
+                                    <p class="mb-4 text-start">Ground Truth (ft, ft, angle): (0,3,0)     
+                                        <br>Ground Truth (m, m, angle): (0,0.914,0)
+                                        <br>Belief (m, m, angle): (0,0.914,-10)
+                                        <br>Belief Probability: 1.0
+                                        </p>
                                     <p class="mb-3 text-big">(5 ft,-3 ft, 0 deg)</p>
                                     <img class="img-fluid rounded mb-3" src="assets/img/lab11/5-3plot.png" alt="..." width="80%"/>
+                                    <p class="mb-4 text-start">Ground Truth (ft, ft, angle): (5,-3,0)    
+                                        <br>Ground Truth (m, m, angle): (1.524,-0.914,0)
+                                        <br>Belief (m, m, angle): (1.524,-0.914,10)
+                                        <br>Belief Probability: 0.9999998
+                                        </p>
                                     <p class="mb-3 text-big">(5 ft,3 ft, 0 deg)</p>
                                     <img class="img-fluid rounded mb-3" src="assets/img/lab11/53plot.png" alt="..." width="80%"/>
+                                    <p class="mb-4 text-start">Ground Truth (ft, ft, angle): (5,3,0)   
+                                        <br>Ground Truth (m, m, angle): (1.524,0.914,0)
+                                        <br>Belief (m, m, angle): (1.524,0.610,-10)
+                                        <br>Belief Probability: 0.9999999
+                                        </p>
                                     <p class="mb-3 text-big">(0 ft,0 ft, 0 deg)</p>
                                     <img class="img-fluid rounded mb-3" src="assets/img/lab11/00plot.png" alt="..." width="80%"/>
-                                    // discuss and how close  some points are quite close(degree might 10 -10 gap) 
-                                    // repeat again and  robot localize better or not?
-                                    
+                                    <p class="mb-4 text-start">Ground Truth (ft, ft, angle): (0,0,0) 
+                                        <br>Ground Truth (m, m, angle): (0,0,0)
+                                        <br>Belief (m, m, angle): (0,0,-10)
+                                        <br>Belief Probability: 0.9999999
+                                        </p>
+                                    <p class="mb-4 text-start">The result is better than I expected; most of the points are accurate, with belief probabilities close to 1. This may be due to grid quantization that causes nearby positions to be rounded together. Although some results fall on the same position, the angles still show some mismatches. This may be because certain locations appear similar with small angle changes, or because the robot’s rotation and the ToF sensor readings are not entirely accurate.</p> 
+                                    <p class="mb-4 text-start">I also reran the entire localization process and found that, except for the point (5ft, 3ft, 0), all other points still matched their ground truth, which is great. As for the point (5ft, 3ft, 0), there is still a slight error, which I suspect is due to off-axis procession during data collection, or possibly because the sensor slightly missed the box corner, causing the measurements to indicate a lower position.</p> 
+                                    <p class="mb-4 text-start">I also took a video during the localization run.</p>
+                                    <iframe class="mb-5" width="560" height="315" src="https://youtube.com/embed/3TOpyESN9P0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>                                   
                                     <button class="btn btn-primary" data-bs-dismiss="modal">
                                         <i class="fas fa-xmark fa-fw"></i>
                                         Close Window
