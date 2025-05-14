@@ -180,7 +180,7 @@
                             <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
                                 <div class="portfolio-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i></div>
                             </div>
-                            <img class="img-fluid" src="assets/img/portfolio/map.jpg" alt="..." />
+                            <img class="img-fluid" src="assets/img/portfolio/path.png" alt="..." />
                         </div>
                         <p class="text-center mt-2 fs-4 fw-bold">Lab12</p> 
                     </div>
@@ -1452,39 +1452,28 @@
                                         <div class="divider-custom-line"></div>
                                     </div>
                                     <!-- Portfolio Modal - Image-->
-                                    <img class="img-fluid rounded mb-5" src="assets/img/portfolio/cabin.png" alt="..." width="300px"/>
+                                    <img class="img-fluid rounded mb-5" src="assets/img/portfolio/path.png" alt="..." width="300px"/>
                                     <!-- Portfolio Modal - Text-->
                                     <h2 class="portfolio-title text-secondary mb-3">Objective</h2>
-                                    <p class="mb-4 text-start">In this lab, I am going to implement grid localization using Bayes filter.</p>
-                                    <h2 class="portfolio-title text-secondary mb-3"style="font-size: 2rem;">Prelab</h2>
-                                    <p class="mb-4 text-start">To prepare for this lab, I need to set up the simulator. I need to install pip packages, ensure the tkinter set up correctly and install Box2D package.</p>
-                                    <h2 class="portfolio-title text-secondary mb-3" style="font-size: 2rem;">Controlled Stunt: Drift</h2>
-                                    <p class="mb-4 text-start">I set the starting point to be 2500 mm from the wall. Next, I separated my controlled stunt into three steps. The first is position control, which includes a Kalman filter and stops the robot within 914 mm from the wall. The second step uses orientation control to initiate a 180-degree turn after stopping in front of the wall. The final step is returning to the starting point, which is performed using open-loop control without any sensors or PID.</p>
-                                    <p class="mb-4 text-start">For the first step, I used what I implemented in Lab 7. The only change was adjusting the target distance to 900 mm. The recorded video is shown below.</p>
-                                    <iframe class="mb-5" width="560" height="315" src="https://youtube.com/embed/MIFKpKfS9o0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>                                   
-                                    <p class="mb-4 text-start">After making sure the Kalman filter works and the robot stops within 914 mm of the wall, I added orientation control to implement the 180-degree turn.</p>
-                                    <p class="mb-4 text-start">With the Lab 6 orientation control in hand, I directly used the function I previously created to handle orientation. I added some code to trigger when the robot reaches 914 mm from the wall—at that point, it stops the current position control, assigns the target angle for a 180-degree turn based on the current orientation, and then starts the orientation control.</p>
-                                    <script src="https://gist.github.com/pengrulung/058e024d87fabe3db63dcfcded85ef54.js"></script>
-                                    <p class="mb-4 text-start">Initially, when attempting a 180-degree turn, the robot would spin in multiple circles before settling near the target angle, as shown in the first video below. After re-tuning the PID parameters for orientation control by decreasing the proportional term and increasing the derivative term (Kp = 0.4, Ki = 0.1, Kd = 20), the robot is now able to perform the 180-degree turn more effectively—though it still occasionally deviates by about 5 degrees. This improved behavior is demonstrated in the second video below.</p>
-                                    <iframe class="mb-5" width="560" height="315" src="https://youtube.com/embed/gs1XTbR48Is" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>                                   
-                                    <iframe class="mb-5" width="560" height="315" src="https://youtube.com/embed/2zpsWzM6e6Q" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>                                   
-                                    <p class="mb-4 text-start">Next, I add movement for my robot to return to the starting point. After testing, I found that a motor PWM of 230 and a delay of 550 ms and stopping work well. Below is my code and video.</p>
-                                    <script src="https://gist.github.com/pengrulung/348b75cd95c51a255d8f98106aaec3e3.js"></script>
-                                    <iframe class="mb-5" width="560" height="315" src="https://youtube.com/embed/qVVtYIteREk" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>                                      
-                                    <p class="mb-4 text-start">After that, I attempted to increase the robot's speed by raising the proportional term in the position control PID. The final tuned values were Kp = 0.031, Ki = 0.00001, and Kd = 0.008. Below, I present the corresponding distance data, as well as the PID P-term, I-term, D-term, and motor PWM output.</p>
-                                    <img class="img-fluid rounded mb-1" src="assets/img/lab8/dis_pos.png" alt="..." />
-                                    <img class="img-fluid rounded mb-1" src="assets/img/lab8/pos_pid.png" alt="..." />
-                                    <img class="img-fluid rounded mb-1" src="assets/img/lab8/pos_pwm.png" alt="..." />
-                                    <p class="mb-4 text-start">I also recorded the degree data along with the PID P-term, I-term, D-term, and motor PWM output for orientation control.</p>
-                                    <img class="img-fluid rounded mb-1" src="assets/img/lab8/ori_deg.png" alt="..." />
-                                    <img class="img-fluid rounded mb-1" src="assets/img/lab8/ori_pid.png" alt="..." />
-                                    <img class="img-fluid rounded mb-1" src="assets/img/lab8/ori_pwm.png" alt="..." />
-                                    <p class="mb-4 text-start">Three final demonstration videos are included to show the results.</p>
-                                    <iframe class="mb-5" width="560" height="315" src="https://youtube.com/embed/oZf60VPBnTc" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>                                      
-                                    <iframe class="mb-5" width="560" height="315" src="https://youtube.com/embed/XqY7UKNly8I" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>                                     
-                                    <iframe class="mb-5" width="560" height="315" src="https://youtube.com/embed/pJNZUtsTlbg" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>                                      
-                                    <p class="mb-4 text-start">In conclusion, I used a drifting approach to perform the stunt. A Kalman filter was applied for position estimation, and a PID controller was used to move the robot forward toward the wall. Orientation control was implemented for turning, assisted by the Digital Motion Processor (DMP), and the robot was guided back to the starting point by assigning appropriate motor values.
-                                    <br> The total fastest time for the robot to start from the initial position, move forward, perform a 180-degree turn, and return to the starting point was 3.4 seconds.</p>
+                                    <p class="mb-4 text-start">In this lab, I need to build on the previous lab in order to follow the assigned path.</p>
+                                    <h2 class="portfolio-title text-secondary mb-3"style="font-size: 2rem;">Initial Plan for Path Navigation</h2>
+                                    <p class="mb-4 text-start">My initial plan was to build on the work I completed in Lab 11, which achieved good localization results, and use it for position estimation in this lab. By using the current localization value and the coordinates of the next target point, I could estimate the required rotation angle(implemented in Lab 6)and calculate the distance between the two points to determine an approximate PWM value for a specific duration (to be determined through testing). If there was a wall in the robot’s forward path, I planned to use the ToF sensor(implemented in Lab 5)to detect obstacles and make the system more stable.</p>
+                                    <img class="img-fluid rounded mb-1" src="assets/img/lab12/f1.png" alt="..." />
+                                    <img class="img-fluid rounded mb-1" src="assets/img/lab12/f2.png" alt="..." />
+                                    <p class="mb-4 text-start">However, when I completed my code and began testing it on the first three points in a real-world scenario, I found that the localization process was quite slow(about 2 minutes). The data often had to be resent, and the localization results were not consistently stable. After observing that other students achieved very good results using non-localization methods, I decided to reduce the difficulty of the lab in order to make the system more reliable and easier to manage.</p>
+                                    <h2 class="portfolio-title text-secondary mb-3" style="font-size: 2rem;">Updated Plan for Path Navigation</h2>
+                                    <p class="mb-4 text-start">For each rotation between waypoints, I directly used the orientation control implemented in Lab 6. The required rotation angle was calculated based on the coordinates of two consecutive waypoints.<br>
+                                    For the first three and the last straight-line segments, I used simple PWM control with a time limit. The parameters (PWM value and duration) were determined through experimental testing.<br>
+                                    For the remaining three straight-line segments, I applied the position control implemented in Lab 5 to determine how far the robot should move, as illustrated in the diagram shown below.</p>
+                                    <img class="img-fluid rounded mb-1" src="assets/img/lab12/plen.jpg" alt="..." />
+                                    <p class="mb-4 text-start">Based on the plan described above, I wrote the code as shown below.<br>
+                                        Each cycle begins with a command that rotates the robot car to face the direction of the next waypoint. After issuing the rotation command, the system pauses for 8 seconds to allow the robot sufficient time to reach the correct orientation, as it sometimes takes a few seconds to adjust. Once the orientation is aligned, the robot moves forward—either using a time-based PWM control or the PID-based position control—until it reaches the next point. This process is repeated for all 7 segments between the waypoints.</p>
+                                    <img class="img-fluid rounded mb-1" src="assets/img/lab12/p1.png" alt="..." />
+                                    <img class="img-fluid rounded mb-1" src="assets/img/lab12/p2.png" alt="..." />
+                                    <img class="img-fluid rounded mb-1" src="assets/img/lab12/p3.png" alt="..." />
+                                    <p class="mb-4 text-start">The recorded video is shown below.</p>
+                                    <p class="mb-4 text-start">However, since some segments are controlled using open-loop methods while others utilize sensors (IMU for rotation and ToF for distance), the overall accuracy is not always consistent. In particular, when the robot rotates and accidentally hits a wall, it lacks the ability to self-correct or recover from the misalignment, which can result in significant deviation from the intended path.<br>
+                                    Although the robot may not stop exactly on the designated waypoints, the overall trajectory still visibly follows the intended path.</p>
                                     <button class="btn btn-primary" data-bs-dismiss="modal">
                                         <i class="fas fa-xmark fa-fw"></i>
                                         Close Window
