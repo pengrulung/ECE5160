@@ -10,5 +10,5 @@ Lab 7: Kalman Filtering                          <br>
 Lab 8: Stunts!                                   <br>
 Lab 9: Mapping                                   <br>
 Lab 10: Localization (sim)                       <br>
-(Not Done)Lab 11: Localization (real)            <br>
+Lab 11: Localization (real)                      <br>
 (Not Done)Lab 12: Planning and Execution         <br>
