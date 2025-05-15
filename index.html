@@ -1470,12 +1470,18 @@
                                         Each cycle begins with a command that rotates the robot car to face the direction of the next waypoint. After issuing the rotation command, the system pauses for 8 seconds to allow the robot sufficient time to reach the correct orientation, as it sometimes takes a few seconds to adjust. Once the orientation is aligned, the robot moves forward—either using a time-based PWM control or the PID-based position control—until it reaches the next point. This process is repeated for all 7 segments between the waypoints.</p>
                                     <img class="img-fluid rounded mb-1" src="assets/img/lab12/p1.png" alt="..." />
                                     <img class="img-fluid rounded mb-1" src="assets/img/lab12/p2.png" alt="..." />
-                                    <img class="img-fluid rounded mb-1" src="assets/img/lab12/p3.png" alt="..." />
+                                    <img class="img-fluid rounded mb-4" src="assets/img/lab12/p3.png" alt="..." />
+                                    <P class="mb-4 text-start">Through several tests, the run was still not perfect. <br>
+                                        In some cases, when the robot slightly deviated from the intended path and required minor adjustments, I manually intervened by gently pushing the car to help it continue along the correct trajectory.</P>
                                     <p class="mb-4 text-start">The recorded videos are shown below.</p>
                                     <iframe class="mb-5" width="560" height="315" src="https://youtube.com/embed/SFcDBkrmZRk" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>                                   
                                     <iframe class="mb-5" width="560" height="315" src="https://youtube.com/embed/gg__zmJ6MQE" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>                                   
-                                    <p class="mb-4 text-start">However, since some segments are controlled using open-loop methods while others utilize sensors (IMU for rotation and ToF for distance), the overall accuracy is not always consistent. In particular, when the robot rotates and accidentally hits a wall, it lacks the ability to self-correct or recover from the misalignment, which can result in significant deviation from the intended path.<br>
-                                    Although the robot may not stop exactly on the designated waypoints, the overall trajectory still visibly follows the intended path.</p>
+                                    <p class="mb-4 text-start">Since some segments are controlled using open-loop methods while others utilize sensors (IMU for rotation and ToF for distance), the overall accuracy is not always consistent.
+                                    <br>In particular, when the robot rotates and accidentally hits a wall, it lacks the ability to self-correct or recover from the misalignment, which can result in significant deviation from the intended path.
+                                    <br>Additionally, the orientation control is not always precise. When traveling long distances, even a small angular error can accumulate and cause the robot to veer off course and potentially crash into a wall.</p>
+                                    <p class="mb-4 text-start">Although the robot may not stop exactly on the designated waypoints, the overall trajectory still visibly follows the intended path.</p> 
+                                    <h2 class="portfolio-title text-secondary mb-3">Acknowledgment</h2>
+                                    <p class="mb-4 text-start">In this lab, I worked independently. However, I would like to thank the TA for helping me identify an issue with a bent Qwiic pin, which had caused incorrect IMU readings and took me a significant amount of time to troubleshoot.</p>
                                     <button class="btn btn-primary" data-bs-dismiss="modal">
                                         <i class="fas fa-xmark fa-fw"></i>
                                         Close Window
